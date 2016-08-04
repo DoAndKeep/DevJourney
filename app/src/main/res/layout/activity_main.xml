@@ -1,0 +1,16 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/toolbar"/>
+
+    <Button
+        android:id="@+id/main_weibo_btn"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="微博"/>
+
+</LinearLayout>
