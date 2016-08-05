@@ -3,12 +3,11 @@ package com.doandkeep.devjourney.bean.weibo;
 import com.doandkeep.devjourney.bean.BaseDto;
 
 /**
- * 最新的公共微博信息
  * Created by zhangtao on 16/8/1.
  */
-public class PublicTimelineUserInfo extends BaseDto {
+public class TimelineUser extends BaseDto {
 
-    private String id;
+    private long id;
     private String screen_name;
     private String name;
     private String province;
@@ -36,11 +35,11 @@ public class PublicTimelineUserInfo extends BaseDto {
     private int online_status;
     private int bi_followers_count;
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

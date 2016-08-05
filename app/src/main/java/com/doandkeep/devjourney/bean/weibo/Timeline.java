@@ -8,18 +8,26 @@ import java.util.List;
  * 最新的公共微博信息
  * Created by zhangtao on 16/8/1.
  */
-public class PublicTimelineInfo extends BaseDto {
+public class Timeline extends BaseDto {
 
-    private int previous_cursor;
+    private List<TimelineStatus> statuses;
+    private String previous_cursor;
     private String next_cursor;
     private int total_number;
-    private List<?> statuses;
 
-    public int getPrevious_cursor() {
+    public List<TimelineStatus> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(List<TimelineStatus> statuses) {
+        this.statuses = statuses;
+    }
+
+    public String getPrevious_cursor() {
         return previous_cursor;
     }
 
-    public void setPrevious_cursor(int previous_cursor) {
+    public void setPrevious_cursor(String previous_cursor) {
         this.previous_cursor = previous_cursor;
     }
 
@@ -37,13 +45,5 @@ public class PublicTimelineInfo extends BaseDto {
 
     public void setTotal_number(int total_number) {
         this.total_number = total_number;
-    }
-
-    public List<?> getStatuses() {
-        return statuses;
-    }
-
-    public void setStatuses(List<?> statuses) {
-        this.statuses = statuses;
     }
 }

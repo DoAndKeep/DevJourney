@@ -3,10 +3,9 @@ package com.doandkeep.devjourney.bean.weibo;
 import com.doandkeep.devjourney.bean.BaseDto;
 
 /**
- * 最新的公共微博信息
  * Created by zhangtao on 16/8/1.
  */
-public class PublicTimelineStatusInfo extends BaseDto {
+public class TimelineStatus extends BaseDto {
 
     private String created_at;
     private long id;
@@ -21,6 +20,7 @@ public class PublicTimelineStatusInfo extends BaseDto {
     private String mid;
     private int reposts_count;
     private int comments_count;
+    private TimelineUser user;
 
     public String getCreated_at() {
         return created_at;
@@ -126,4 +126,11 @@ public class PublicTimelineStatusInfo extends BaseDto {
         this.comments_count = comments_count;
     }
 
+    public TimelineUser getUser() {
+        return user;
+    }
+
+    public void setUser(TimelineUser user) {
+        this.user = user;
+    }
 }

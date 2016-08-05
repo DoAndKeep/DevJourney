@@ -1,4 +1,4 @@
-package com.doandkeep.devjourney.main.weibo.timeline;
+package com.doandkeep.devjourney.main.weibo.timeline.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,18 +13,19 @@ import android.view.View;
 
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.main.weibo.Constants;
+import com.doandkeep.devjourney.main.weibo.timeline.WeiboTimelineFragment;
 import com.doandkeep.devjourney.main.weibo.timeline.view.TimelineTabView;
 
 /**
  * Created by zhangtao on 16/8/3.
  */
-public class WeiboTimelineAdapter extends FragmentPagerAdapter {
+public class TimelinePagerAdapter extends FragmentPagerAdapter {
 
     private static final int PAGE_COUNT = 3;
 
     private Context mContext;
 
-    public WeiboTimelineAdapter(Context context, FragmentManager fm) {
+    public TimelinePagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.mContext = context;
     }

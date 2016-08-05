@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.BaseActvity;
+import com.doandkeep.devjourney.main.weibo.timeline.adapter.TimelinePagerAdapter;
 
 import butterknife.BindView;
 
@@ -20,7 +21,7 @@ public class WeiboTimelineActivity extends BaseActvity {
     @BindView(R.id.timeline_viewpager)
     ViewPager mViewPager;
 
-    private WeiboTimelineAdapter mTimelineAdapter;
+    private TimelinePagerAdapter mTimelineAdapter;
 
     @Override
     protected int getContentViewId() {
@@ -36,7 +37,7 @@ public class WeiboTimelineActivity extends BaseActvity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mTimelineAdapter = new WeiboTimelineAdapter(mActvity, mActvity.getSupportFragmentManager());
+        mTimelineAdapter = new TimelinePagerAdapter(mActvity, mActvity.getSupportFragmentManager());
 
         mViewPager.setAdapter(mTimelineAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
