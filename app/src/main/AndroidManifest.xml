@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".main.demo.DemoActivity"/>
+        <activity android:name=".main.demo.ToolbarDemoActivity"/>
+
         <activity android:name=".main.weibo.WeiboActivity"/>
         <activity android:name=".main.weibo.timeline.WeiboTimelineActivity"/>
 

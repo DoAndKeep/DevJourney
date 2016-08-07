@@ -1,9 +1,16 @@
 # DevJourney
-Note what I learned.
+记录Android开发路上的点点滴滴.
 
-目前里面已有内容：
+##Android View
+
+ - Toolbar
+	
+	[http://www.jianshu.com/p/b3a40a55826e](http://www.jianshu.com/p/b3a40a55826e)
+ 
+ - TabLayout
+
+##开源框架
 
  - ButterKnife
- - Toolbar
- - TabLayout
+
  - Retrofit

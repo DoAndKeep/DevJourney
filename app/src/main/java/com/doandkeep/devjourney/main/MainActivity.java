@@ -1,10 +1,10 @@
 package com.doandkeep.devjourney.main;
 
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
 
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.BaseActvity;
+import com.doandkeep.devjourney.main.demo.DemoActivity;
 import com.doandkeep.devjourney.main.weibo.WeiboActivity;
 
 import butterknife.OnClick;
@@ -28,8 +28,14 @@ public class MainActivity extends BaseActvity {
     }
 
     @Override
-    protected void hanldeToolbar(Toolbar toolbar) {
-        toolbar.setNavigationIcon(null);
+    protected void hanldeToolbar(ToolbarHelper toolbarHelper) {
+        toolbarHelper.getToolbar().setNavigationIcon(null);
+    }
+
+    @OnClick(R.id.main_demo_btn)
+    public void forwardDemo() {
+        Intent intent = new Intent(MainActivity.this, DemoActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.main_weibo_btn)

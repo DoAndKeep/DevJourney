@@ -8,6 +8,12 @@
         layout="@layout/toolbar"/>
 
     <Button
+        android:id="@+id/main_demo_btn"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="Demo"/>
+
+    <Button
         android:id="@+id/main_weibo_btn"
         android:layout_width="200dp"
         android:layout_height="48dp"

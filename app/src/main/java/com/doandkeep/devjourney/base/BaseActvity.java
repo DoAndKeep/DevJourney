@@ -46,7 +46,7 @@ public abstract class BaseActvity extends AppCompatActivity {
                 mToolbarHelper.setTitle(getToolbarTitle());
             }
 
-            hanldeToolbar(toolbar);
+            hanldeToolbar(mToolbarHelper);
         }
 
         if (getIntent() != null) {
@@ -58,7 +58,7 @@ public abstract class BaseActvity extends AppCompatActivity {
 
     protected abstract String getToolbarTitle();
 
-    protected void hanldeToolbar(Toolbar toolbar) {
+    protected void hanldeToolbar(ToolbarHelper toolbarHelper) {
 
     }
 
@@ -81,7 +81,7 @@ public abstract class BaseActvity extends AppCompatActivity {
         }
     }
 
-    class ToolbarHelper {
+    public static class ToolbarHelper {
 
         private Toolbar mToolbar;
 
