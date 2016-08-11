@@ -34,4 +34,6 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
 }

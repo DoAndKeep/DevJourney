@@ -10,16 +10,16 @@ import java.util.List;
  */
 public class Timeline extends BaseDto {
 
-    private List<TimelineStatus> statuses;
+    private List<WeiboTimeline> statuses;
     private String previous_cursor;
     private String next_cursor;
     private int total_number;
 
-    public List<TimelineStatus> getStatuses() {
+    public List<WeiboTimeline> getStatuses() {
         return statuses;
     }
 
-    public void setStatuses(List<TimelineStatus> statuses) {
+    public void setStatuses(List<WeiboTimeline> statuses) {
         this.statuses = statuses;
     }
 

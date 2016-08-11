@@ -5,7 +5,7 @@ import com.doandkeep.devjourney.bean.BaseDto;
 /**
  * Created by zhangtao on 16/8/1.
  */
-public class TimelineStatus extends BaseDto {
+public class WeiboTimeline extends BaseDto {
 
     private String created_at;
     private long id;
@@ -16,11 +16,14 @@ public class TimelineStatus extends BaseDto {
     private String in_reply_to_status_id;
     private String in_reply_to_user_id;
     private String in_reply_to_screen_name;
+    private String thumbnail_pic;
+    private String bmiddle_pic;
+    private String original_pic;
     private Object geo;
     private String mid;
     private int reposts_count;
     private int comments_count;
-    private TimelineUser user;
+    private WeiboUser user;
 
     public String getCreated_at() {
         return created_at;
@@ -102,6 +105,30 @@ public class TimelineStatus extends BaseDto {
         this.geo = geo;
     }
 
+    public String getThumbnail_pic() {
+        return thumbnail_pic;
+    }
+
+    public void setThumbnail_pic(String thumbnail_pic) {
+        this.thumbnail_pic = thumbnail_pic;
+    }
+
+    public String getBmiddle_pic() {
+        return bmiddle_pic;
+    }
+
+    public void setBmiddle_pic(String bmiddle_pic) {
+        this.bmiddle_pic = bmiddle_pic;
+    }
+
+    public String getOriginal_pic() {
+        return original_pic;
+    }
+
+    public void setOriginal_pic(String original_pic) {
+        this.original_pic = original_pic;
+    }
+
     public String getMid() {
         return mid;
     }
@@ -126,11 +153,11 @@ public class TimelineStatus extends BaseDto {
         this.comments_count = comments_count;
     }
 
-    public TimelineUser getUser() {
+    public WeiboUser getUser() {
         return user;
     }
 
-    public void setUser(TimelineUser user) {
+    public void setUser(WeiboUser user) {
         this.user = user;
     }
 }

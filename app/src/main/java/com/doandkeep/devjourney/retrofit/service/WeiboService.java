@@ -11,11 +11,11 @@ import retrofit2.http.Query;
  */
 public interface WeiboService {
     @GET("statuses/public_timeline.json")
-    Call<Timeline> timelineForPublic(@Query("access_token") String token);
+    Call<Timeline> timelineForPublic(@Query("access_token") String token, @Query("count") int count, @Query("page") int page);
 
     @GET("statuses/friends_timeline.json")
-    Call<Timeline> timelineForFriend(@Query("access_token") String token);
+    Call<Timeline> timelineForFriend(@Query("access_token") String token, @Query("count") int count, @Query("page") int page);
 
     @GET("statuses/user_timeline.json")
-    Call<Timeline> timelineForMine(@Query("access_token") String token);
+    Call<Timeline> timelineForMine(@Query("access_token") String token, @Query("count") int count, @Query("page") int page);
 }

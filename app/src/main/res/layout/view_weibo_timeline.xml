@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <com.doandkeep.devjourney.view.AdvanceImageView
+                android:id="@+id/timeline_user_profile_iv"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                tools:src="@drawable/icon_weibo_timeline_mine"/>
+
+            <TextView
+                android:id="@+id/timeline_user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/timeline_user_profile_iv"
+                android:layout_toRightOf="@id/timeline_user_profile_iv"
+                android:lines="1"
+                tools:text="诺阿提斯"/>
+
+            <TextView
+                android:id="@+id/timeline_create_source_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/timeline_user_profile_iv"
+                android:layout_alignLeft="@id/timeline_user_name_tv"
+                android:lines="1"
+                tools:text="3小时前  来自 德玛西亚"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/timeline_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="加入了微博大家庭"/>
+
+        <com.doandkeep.devjourney.view.AdvanceImageView
+            android:id="@+id/timeline_picture_iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerInside"
+            tools:src="@drawable/icon_weibo_timeline_friend"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#DDDDDD"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/timeline_repost_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon_timeline_repost"/>
+
+                <TextView
+                    android:id="@+id/timeline_repost_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    tools:text="2222"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="#DDDDDD"/>
+
+            <LinearLayout
+                android:id="@+id/timeline_comment_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icon_timeline_comment"/>
+
+                <TextView
+                    android:id="@+id/timeline_comment_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    tools:text="2222"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

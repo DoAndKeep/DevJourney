@@ -5,7 +5,7 @@ import com.doandkeep.devjourney.bean.BaseDto;
 /**
  * Created by zhangtao on 16/8/1.
  */
-public class TimelineUser extends BaseDto {
+public class WeiboUser extends BaseDto {
 
     private long id;
     private String screen_name;
