@@ -1,6 +1,7 @@
 package com.doandkeep.devjourney.main.weibo.timeline;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +14,6 @@ import com.doandkeep.devjourney.main.weibo.Constants;
 import com.doandkeep.devjourney.main.weibo.timeline.adapter.TimelineAdapter;
 import com.doandkeep.devjourney.retrofit.ServiceGenerator;
 import com.doandkeep.devjourney.retrofit.service.WeiboService;
-import com.doandkeep.devjourney.third.weibo.AccessTokenKeeper;
 import com.doandkeep.devjourney.util.DebugLog;
 import com.doandkeep.devjourney.view.cyclerview.DividerItemDecoration;
 import com.doandkeep.devjourney.view.cyclerview.EndlessRecyclerViewScrollListener;
@@ -93,6 +93,17 @@ public class WeiboTimelineFragment extends BaseFragment {
             }
         });
 
+        if (mType == Constants.TYPE_TIMELINE_PUBLIC) {
+            Snackbar.make(mSwipeRefreshLayout, "欢迎来到Dev Journey!", Snackbar.LENGTH_INDEFINITE)
+                    .setDuration(5000)
+                    .setAction("开始旅途", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            DebugLog.i(TAG, "点击了snackbar！");
+                        }
+                    }).show();
+        }
+
         loadInitalTimelines();
     }
 
@@ -102,16 +113,16 @@ public class WeiboTimelineFragment extends BaseFragment {
         Call<Timeline> call;
         switch (mType) {
             case Constants.TYPE_TIMELINE_PUBLIC:
-                call = weiboService.timelineForPublic(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, 1);
+                call = weiboService.timelineForPublic();
                 break;
             case Constants.TYPE_TIMELINE_FRIEND:
-                call = weiboService.timelineForFriend(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, 1);
+                call = weiboService.timelineForFriend(COUNT_PER_REQ, 1);
                 break;
             case Constants.TYPE_TIMELINE_MINE:
-                call = weiboService.timelineForMine(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, 1);
+                call = weiboService.timelineForMine(COUNT_PER_REQ, 1);
                 break;
             default:
-                call = weiboService.timelineForPublic(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, 1);
+                call = weiboService.timelineForMine(COUNT_PER_REQ, 1);
                 break;
         }
 
@@ -142,16 +153,16 @@ public class WeiboTimelineFragment extends BaseFragment {
         Call<Timeline> call;
         switch (mType) {
             case Constants.TYPE_TIMELINE_PUBLIC:
-                call = weiboService.timelineForPublic(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, page);
+                call = weiboService.timelineForPublic(COUNT_PER_REQ, page);
                 break;
             case Constants.TYPE_TIMELINE_FRIEND:
-                call = weiboService.timelineForFriend(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, page);
+                call = weiboService.timelineForFriend(COUNT_PER_REQ, page);
                 break;
             case Constants.TYPE_TIMELINE_MINE:
-                call = weiboService.timelineForMine(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, page);
+                call = weiboService.timelineForMine(COUNT_PER_REQ, page);
                 break;
             default:
-                call = weiboService.timelineForPublic(AccessTokenKeeper.readAccessToken(getContext()).getToken(), COUNT_PER_REQ, page);
+                call = weiboService.timelineForPublic(COUNT_PER_REQ, page);
                 break;
         }
 

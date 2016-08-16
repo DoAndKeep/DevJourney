@@ -8,11 +8,23 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.doandkeep.devjourney.R;
+import com.doandkeep.devjourney.base.MyApplication;
+import com.doandkeep.devjourney.bean.BaseWeiboResponse;
+import com.doandkeep.devjourney.bean.request.weibo.RepostBody;
+import com.doandkeep.devjourney.bean.weibo.Timeline;
 import com.doandkeep.devjourney.bean.weibo.WeiboTimeline;
+import com.doandkeep.devjourney.retrofit.ServiceGenerator;
+import com.doandkeep.devjourney.retrofit.service.WeiboService;
+import com.doandkeep.devjourney.third.weibo.AccessTokenKeeper;
+import com.doandkeep.devjourney.util.DebugLog;
 import com.doandkeep.devjourney.view.AdvanceImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by zhangtao on 16/8/5.
@@ -36,6 +48,8 @@ public class WeiboTimelineView extends FrameLayout {
     @BindView(R.id.timeline_comment_count_tv)
     TextView mCommentCountTV;
 
+    private WeiboTimeline mTimeline;
+
     public WeiboTimelineView(Context context) {
         super(context);
         init(context);
@@ -52,6 +66,8 @@ public class WeiboTimelineView extends FrameLayout {
     }
 
     public void setData(WeiboTimeline timeline) {
+        this.mTimeline = timeline;
+
         AdvanceImageView.ImageViewSpec spec = new AdvanceImageView.ImageViewSpec();
         spec.setCircle(true);
         mUserProfileIV.setUrl(timeline.getUser().getProfile_image_url(), spec);
@@ -66,5 +82,23 @@ public class WeiboTimelineView extends FrameLayout {
         }
         mRepostCountTV.setText(timeline.getReposts_count() + "");
         mCommentCountTV.setText(timeline.getComments_count() + "");
+    }
+
+    @OnClick(R.id.timeline_repost_layout)
+    public void repost() {
+        WeiboService weiboService = ServiceGenerator.createService(WeiboService.class);
+        Call<WeiboTimeline> call = weiboService.repost(mTimeline.getId());
+
+        call.enqueue(new Callback<WeiboTimeline>() {
+            @Override
+            public void onResponse(Call<WeiboTimeline> call, Response<WeiboTimeline> response) {
+            }
+
+            @Override
+            public void onFailure(Call<WeiboTimeline> call, Throwable t) {
+            }
+        });
+
+
     }
 }

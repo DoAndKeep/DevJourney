@@ -1,11 +1,11 @@
 package com.doandkeep.devjourney.bean.weibo;
 
-import com.doandkeep.devjourney.bean.BaseDto;
+import com.doandkeep.devjourney.bean.BaseWeiboResponse;
 
 /**
  * Created by zhangtao on 16/8/1.
  */
-public class WeiboUser extends BaseDto {
+public class WeiboUser extends BaseWeiboResponse {
 
     private long id;
     private String screen_name;

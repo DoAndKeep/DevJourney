@@ -44,13 +44,13 @@ public class TimelineAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TimelineStatusViewHolder viewHolder = new TimelineStatusViewHolder(new WeiboTimelineView(parent.getContext()));
+        TimelineViewHolder viewHolder = new TimelineViewHolder(new WeiboTimelineView(parent.getContext()));
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((TimelineStatusViewHolder) holder).mTimelineView.setData(mTimelines.get(position));
+        ((TimelineViewHolder) holder).mTimelineView.setData(mTimelines.get(position));
     }
 
     @Override
@@ -58,10 +58,10 @@ public class TimelineAdapter extends RecyclerView.Adapter {
         return mTimelines == null ? 0 : mTimelines.size();
     }
 
-    public static class TimelineStatusViewHolder extends RecyclerView.ViewHolder {
+    public static class TimelineViewHolder extends RecyclerView.ViewHolder {
         public WeiboTimelineView mTimelineView;
 
-        public TimelineStatusViewHolder(WeiboTimelineView timelineView) {
+        public TimelineViewHolder(WeiboTimelineView timelineView) {
             super(timelineView);
 
             this.mTimelineView = timelineView;

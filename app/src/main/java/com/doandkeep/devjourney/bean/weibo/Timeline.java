@@ -1,6 +1,6 @@
 package com.doandkeep.devjourney.bean.weibo;
 
-import com.doandkeep.devjourney.bean.BaseDto;
+import com.doandkeep.devjourney.bean.BaseWeiboResponse;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * 最新的公共微博信息
  * Created by zhangtao on 16/8/1.
  */
-public class Timeline extends BaseDto {
+public class Timeline extends BaseWeiboResponse {
 
     private List<WeiboTimeline> statuses;
     private String previous_cursor;

@@ -1,14 +1,14 @@
 package com.doandkeep.devjourney.bean.weibo;
 
-import com.doandkeep.devjourney.bean.BaseDto;
+import com.doandkeep.devjourney.bean.BaseWeiboResponse;
 
 /**
  * Created by zhangtao on 16/8/1.
  */
-public class WeiboTimeline extends BaseDto {
+public class WeiboTimeline extends BaseWeiboResponse {
 
     private String created_at;
-    private long id;
+    private String id;
     private String text;
     private String source;
     private boolean favorited;
@@ -33,11 +33,11 @@ public class WeiboTimeline extends BaseDto {
         this.created_at = created_at;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
