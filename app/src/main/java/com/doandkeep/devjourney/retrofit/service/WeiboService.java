@@ -1,20 +1,14 @@
 package com.doandkeep.devjourney.retrofit.service;
 
-import com.doandkeep.devjourney.bean.BaseWeiboResponse;
-import com.doandkeep.devjourney.bean.request.weibo.RepostBody;
 import com.doandkeep.devjourney.bean.weibo.Timeline;
 import com.doandkeep.devjourney.bean.weibo.WeiboTimeline;
 
-import java.util.Map;
-
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * Created by zhangtao on 16/8/5.

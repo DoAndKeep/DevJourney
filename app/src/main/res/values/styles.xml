@@ -24,6 +24,16 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="AppTheme.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppTheme.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabMaxWidth">360dp</item>
         <item name="tabIndicatorColor">?attr/colorAccent</item>

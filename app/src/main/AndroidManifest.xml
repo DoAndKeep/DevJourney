@@ -8,13 +8,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".base.MyApplication"
+        android:name=".AndroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".features.main.presentation.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -22,11 +22,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.demo.DemoActivity"/>
-        <activity android:name=".main.demo.ToolbarDemoActivity"/>
+        <activity android:name=".features.weather.presentation.view.WeatherActivity"/>
+        <activity android:name=".features.demo.DemoActivity"/>
+        <activity android:name=".features.demo.ToolbarDemoActivity"/>
+        <activity android:name=".features.demo.CustomViewActivity"/>
 
-        <activity android:name=".main.weibo.WeiboActivity"/>
-        <activity android:name=".main.weibo.timeline.WeiboTimelineActivity"/>
+        <activity android:name=".features.weibo.WeiboActivity"/>
+        <activity android:name=".features.weibo.timeline.WeiboTimelineActivity"/>
 
 
         <activity

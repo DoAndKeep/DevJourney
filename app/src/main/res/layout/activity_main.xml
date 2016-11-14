@@ -8,6 +8,12 @@
         layout="@layout/toolbar"/>
 
     <Button
+        android:id="@+id/main_weather_btn"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:text="天气"/>
+
+    <Button
         android:id="@+id/main_demo_btn"
         android:layout_width="200dp"
         android:layout_height="48dp"

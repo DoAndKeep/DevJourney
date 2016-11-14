@@ -1,8 +1,7 @@
 package com.doandkeep.devjourney.retrofit;
 
-import com.doandkeep.devjourney.base.MyApplication;
+import com.doandkeep.devjourney.AndroidApplication;
 import com.doandkeep.devjourney.third.weibo.AccessTokenKeeper;
-import com.doandkeep.devjourney.util.DebugLog;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -20,13 +20,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServiceGenerator {
 
-    private static final String TAG = ServiceGenerator.class.getCanonicalName();
-
     private static final String BASE_URL = "https://api.weibo.com/2/";
 
     private static Retrofit.Builder retrofitBuilder =
             new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create());
 
     private static OkHttpClient.Builder okHttpClientBuilder =
@@ -38,7 +37,7 @@ public class ServiceGenerator {
 
                     if (originalHttpUrl.url().toString().startsWith(BASE_URL)) {
                         HttpUrl url = originalHttpUrl.newBuilder()
-                                .addQueryParameter("access_token", AccessTokenKeeper.readAccessToken(MyApplication.getInstance()).getToken())
+                                .addQueryParameter("access_token", AccessTokenKeeper.readAccessToken(AndroidApplication.getInstance()).getToken())
                                 .build();
                         Request request = originalRequest.newBuilder()
                                 .url(url)
