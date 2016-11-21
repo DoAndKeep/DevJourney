@@ -27,7 +27,7 @@
         <activity android:name=".features.demo.ToolbarDemoActivity"/>
         <activity android:name=".features.demo.CustomViewActivity"/>
 
-        <activity android:name=".features.weibo.WeiboActivity"/>
+        <activity android:name=".features.weibo.presentation.view.WeiboActivity"/>
         <activity android:name=".features.weibo.timeline.WeiboTimelineActivity"/>
 
 

@@ -14,7 +14,6 @@ import com.doandkeep.devjourney.features.weather.presentation.presenter.WeatherP
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import timber.log.Timber;
 
 /**
  * Created by zhangtao on 2016/11/9.
@@ -62,12 +61,10 @@ public class WeatherFragment extends BaseFragment implements WeatherView {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Timber.i("onViewCreated");
         super.onViewCreated(view, savedInstanceState);
         this.mWeatherPresenter.setView(this);
         if (savedInstanceState == null) {
             this.loadWeather();
-            Timber.i("WeatherFragment onViewCreated");
         }
     }
 

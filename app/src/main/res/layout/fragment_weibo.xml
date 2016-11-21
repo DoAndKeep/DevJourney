@@ -5,20 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar"/>
-
     <Button
         android:id="@+id/weibo_bind_btn"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_centerInParent="true"
         android:text="绑定"/>
 
     <Button
-        android:id="@+id/weibo_status_btn"
+        android:id="@+id/weibo_timlines_btn"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:layout_below="@id/weibo_bind_btn"
-        android:text="微博状态"/>
+        android:text="微博列表"/>
+
 </LinearLayout>

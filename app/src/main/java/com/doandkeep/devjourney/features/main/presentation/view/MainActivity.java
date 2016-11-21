@@ -6,11 +6,10 @@ import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
 import com.doandkeep.devjourney.features.demo.DemoActivity;
 import com.doandkeep.devjourney.features.weather.presentation.view.WeatherActivity;
-import com.doandkeep.devjourney.features.weibo.WeiboActivity;
+import com.doandkeep.devjourney.features.weibo.presentation.view.WeiboActivity;
 import com.doandkeep.devjourney.util.view.ToolbarHelper;
 
 import butterknife.OnClick;
-import timber.log.Timber;
 
 public class MainActivity extends BaseActvity {
 
@@ -29,7 +28,6 @@ public class MainActivity extends BaseActvity {
     public void forwardWeather() {
         Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
         startActivity(intent);
-        Timber.e("forwardWeather");
     }
 
     @OnClick(R.id.main_demo_btn)
