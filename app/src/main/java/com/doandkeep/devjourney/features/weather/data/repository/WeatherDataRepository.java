@@ -1,6 +1,5 @@
 package com.doandkeep.devjourney.features.weather.data.repository;
 
-import com.doandkeep.devjourney.base.di.PerActivity;
 import com.doandkeep.devjourney.features.weather.data.entity.WeatherWrapperEntity;
 import com.doandkeep.devjourney.features.weather.data.entity.mapper.WeatherEntityDataMapper;
 import com.doandkeep.devjourney.features.weather.domain.bean.Weather;
@@ -8,6 +7,7 @@ import com.doandkeep.devjourney.features.weather.domain.repository.WeatherReposi
 import com.doandkeep.devjourney.retrofit.ServiceGenerator;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -15,7 +15,7 @@ import rx.functions.Func1;
 /**
  * Created by zhangtao on 2016/11/8.
  */
-@PerActivity
+@Singleton
 public class WeatherDataRepository implements WeatherRepository {
 
     private final WeatherEntityDataMapper mWeatherEntityDataMapper;

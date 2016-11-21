@@ -2,7 +2,6 @@ package com.doandkeep.devjourney.features.weather.presentation.di;
 
 import com.doandkeep.devjourney.base.di.PerActivity;
 import com.doandkeep.devjourney.base.domain.UseCase;
-import com.doandkeep.devjourney.features.weather.data.repository.WeatherDataRepository;
 import com.doandkeep.devjourney.features.weather.domain.GetWeatherUseCase;
 import com.doandkeep.devjourney.features.weather.domain.repository.WeatherRepository;
 
@@ -34,7 +33,7 @@ public class WeatherModule {
     @Provides
     @PerActivity
     @Named("weather")
-    UseCase provideGetWeatherUserCase(WeatherDataRepository weatherRepository) {
+    UseCase provideGetWeatherUserCase(WeatherRepository weatherRepository) {
         return new GetWeatherUseCase(mUrl, mCityName, weatherRepository);
     }
 

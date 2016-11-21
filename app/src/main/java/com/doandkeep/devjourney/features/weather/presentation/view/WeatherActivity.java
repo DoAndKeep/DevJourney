@@ -1,7 +1,6 @@
 package com.doandkeep.devjourney.features.weather.presentation.view;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 
 import com.doandkeep.devjourney.R;
