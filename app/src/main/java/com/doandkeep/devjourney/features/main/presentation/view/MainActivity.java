@@ -36,8 +36,8 @@ public class MainActivity extends BaseActvity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.main_weibo_btn)
-    public void forwardWeibo() {
+    @OnClick(R.id.main_douban_btn)
+    public void forwardDouban() {
         Intent intent = new Intent(MainActivity.this, DoubanActivity.class);
         startActivity(intent);
     }

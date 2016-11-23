@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.doandkeep.devjourney.R;
-import com.doandkeep.devjourney.bean.weibo.WeiboTimeline;
+import com.doandkeep.devjourney.features.douban.data.entity.DoubanMovieEntity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +20,7 @@ public class DoubanMovieItemView extends FrameLayout {
     @BindView(R.id.movie_name_tv)
     TextView mNameTV;
 
-    private WeiboTimeline mTimeline;
+    private DoubanMovieEntity movie;
 
     public DoubanMovieItemView(Context context) {
         super(context);
@@ -37,9 +37,9 @@ public class DoubanMovieItemView extends FrameLayout {
         ButterKnife.bind(this, this);
     }
 
-    public void setData(WeiboTimeline timeline) {
-        this.mTimeline = timeline;
+    public void setData(DoubanMovieEntity movie) {
+        this.movie = movie;
 
-        mNameTV.setText(timeline.getUser().getScreen_name());
+        mNameTV.setText(movie.getTitle());
     }
 }

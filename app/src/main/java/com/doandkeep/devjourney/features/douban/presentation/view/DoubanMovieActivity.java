@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
-import com.doandkeep.devjourney.features.douban.timeline.adapter.DoubanMoviePagerAdapter;
+import com.doandkeep.devjourney.features.douban.presentation.DoubanMoviePagerAdapter;
 import com.doandkeep.devjourney.util.view.ToolbarHelper;
 
 import butterknife.BindView;

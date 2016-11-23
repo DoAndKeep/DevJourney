@@ -1,10 +1,12 @@
 package com.doandkeep.devjourney.features.weather.data.entity;
 
+import com.doandkeep.devjourney.base.data.entity.IDataEntity;
+
 /**
  * data层级的天气
  * Created by zhangtao on 2016/11/8.
  */
-public class WeatherEntity {
+public class WeatherEntity implements IDataEntity {
     private String city;
     private String pinyin;
     private String citycode;

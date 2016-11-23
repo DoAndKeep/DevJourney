@@ -1,6 +1,6 @@
 package com.doandkeep.devjourney.features.douban.data;
 
-import com.doandkeep.devjourney.bean.weibo.Timeline;
+import com.doandkeep.devjourney.features.douban.data.entity.DoubanMovieListEntity;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 public interface DoubanService {
 
     @GET("movie/in_theaters")
-    Call<Timeline> movieForInTheaters(@Query("city") String city);
+    Call<DoubanMovieListEntity> movieForInTheaters(@Query("city") String city);
 }

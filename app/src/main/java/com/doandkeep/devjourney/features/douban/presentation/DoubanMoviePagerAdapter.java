@@ -1,4 +1,4 @@
-package com.doandkeep.devjourney.features.douban.timeline.adapter;
+package com.doandkeep.devjourney.features.douban.presentation;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

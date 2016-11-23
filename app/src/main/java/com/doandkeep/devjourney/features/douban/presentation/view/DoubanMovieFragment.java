@@ -9,8 +9,8 @@ import android.view.View;
 
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseFragment;
-import com.doandkeep.devjourney.bean.weibo.Timeline;
-import com.doandkeep.devjourney.features.douban.timeline.adapter.TimelineAdapter;
+import com.doandkeep.devjourney.features.douban.data.entity.DoubanMovieListEntity;
+import com.doandkeep.devjourney.features.douban.presentation.DoubanMovieAdapter;
 import com.doandkeep.devjourney.base.ServiceGenerator;
 import com.doandkeep.devjourney.features.douban.data.DoubanService;
 import com.doandkeep.devjourney.view.cyclerview.DividerItemDecoration;
@@ -20,6 +20,7 @@ import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 /**
  * Created by zhangtao on 16/8/3.
@@ -34,7 +35,7 @@ public class DoubanMovieFragment extends BaseFragment {
     RecyclerView mRecyclerView;
 
     private LinearLayoutManager mLayoutManager;
-    private TimelineAdapter mAdapter;
+    private DoubanMovieAdapter mAdapter;
 
     private int mType;
 
@@ -55,7 +56,7 @@ public class DoubanMovieFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.fragment_weibo_timeline;
+        return R.layout.fragment_douban_movie;
     }
 
     @Override
@@ -70,11 +71,11 @@ public class DoubanMovieFragment extends BaseFragment {
             }
         });
 
-        mAdapter = new TimelineAdapter(null);
+        mAdapter = new DoubanMovieAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
-        itemDecoration.setDivider(getContext().getResources().getDrawable(R.drawable.divider_weibo_timeline));
+        itemDecoration.setDivider(getContext().getResources().getDrawable(R.drawable.divider_douban_movie));
         mRecyclerView.addItemDecoration(itemDecoration);
 
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -84,7 +85,7 @@ public class DoubanMovieFragment extends BaseFragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadInitalTimelines();
+                loadMovies();
             }
         });
 
@@ -96,26 +97,27 @@ public class DoubanMovieFragment extends BaseFragment {
                     }
                 }).show();
 
-        loadInitalTimelines();
+        loadMovies();
     }
 
-    private void loadInitalTimelines() {
+    private void loadMovies() {
+        Timber.i("load movie");
         DoubanService doubanService = ServiceGenerator.createService(DoubanService.class);
 
-        Call<Timeline> call = doubanService.movieForInTheaters("北京");
+        Call<DoubanMovieListEntity> call = doubanService.movieForInTheaters("北京");
 
-        call.enqueue(new Callback<Timeline>() {
+        call.enqueue(new Callback<DoubanMovieListEntity>() {
             @Override
-            public void onResponse(Call<Timeline> call, Response<Timeline> response) {
+            public void onResponse(Call<DoubanMovieListEntity> call, Response<DoubanMovieListEntity> response) {
                 onLoadedComplete();
                 if (response.isSuccessful()) {
-                    mAdapter.setData(response.body().getStatuses());
+                    mAdapter.setData(response.body().getSubjects());
                 } else {
                 }
             }
 
             @Override
-            public void onFailure(Call<Timeline> call, Throwable t) {
+            public void onFailure(Call<DoubanMovieListEntity> call, Throwable t) {
                 onLoadedComplete();
             }
         });

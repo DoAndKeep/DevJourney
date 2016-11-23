@@ -30,13 +30,6 @@
         <activity android:name=".features.douban.presentation.view.DoubanActivity"/>
         <activity android:name=".features.douban.presentation.view.DoubanMovieActivity"/>
 
-
-        <activity
-            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
     </application>
 
 

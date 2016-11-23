@@ -20,9 +20,9 @@
         android:text="Demo"/>
 
     <Button
-        android:id="@+id/main_weibo_btn"
+        android:id="@+id/main_douban_btn"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:text="微博"/>
+        android:text="豆瓣"/>
 
 </LinearLayout>
