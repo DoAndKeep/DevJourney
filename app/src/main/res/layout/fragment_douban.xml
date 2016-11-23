@@ -6,15 +6,9 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/weibo_bind_btn"
+        android:id="@+id/douban_movie_btn"
         android:layout_width="200dp"
         android:layout_height="48dp"
-        android:text="绑定"/>
-
-    <Button
-        android:id="@+id/weibo_timlines_btn"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:text="微博列表"/>
+        android:text="电影"/>
 
 </LinearLayout>

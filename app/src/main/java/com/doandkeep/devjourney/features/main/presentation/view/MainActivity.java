@@ -6,7 +6,7 @@ import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
 import com.doandkeep.devjourney.features.demo.DemoActivity;
 import com.doandkeep.devjourney.features.weather.presentation.view.WeatherActivity;
-import com.doandkeep.devjourney.features.weibo.presentation.view.WeiboActivity;
+import com.doandkeep.devjourney.features.douban.presentation.view.DoubanActivity;
 import com.doandkeep.devjourney.util.view.ToolbarHelper;
 
 import butterknife.OnClick;
@@ -38,7 +38,7 @@ public class MainActivity extends BaseActvity {
 
     @OnClick(R.id.main_weibo_btn)
     public void forwardWeibo() {
-        Intent intent = new Intent(MainActivity.this, WeiboActivity.class);
+        Intent intent = new Intent(MainActivity.this, DoubanActivity.class);
         startActivity(intent);
     }
 

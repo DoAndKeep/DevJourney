@@ -1,10 +1,10 @@
-package com.doandkeep.devjourney.features.weibo.timeline.adapter;
+package com.doandkeep.devjourney.features.douban.timeline.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.doandkeep.devjourney.bean.weibo.WeiboTimeline;
-import com.doandkeep.devjourney.features.weibo.timeline.view.WeiboTimelineView;
+import com.doandkeep.devjourney.features.douban.presentation.view.DoubanMovieItemView;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class TimelineAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TimelineViewHolder viewHolder = new TimelineViewHolder(new WeiboTimelineView(parent.getContext()));
+        TimelineViewHolder viewHolder = new TimelineViewHolder(new DoubanMovieItemView(parent.getContext()));
         return viewHolder;
     }
 
@@ -57,9 +57,9 @@ public class TimelineAdapter extends RecyclerView.Adapter {
     }
 
     public static class TimelineViewHolder extends RecyclerView.ViewHolder {
-        public WeiboTimelineView mTimelineView;
+        public DoubanMovieItemView mTimelineView;
 
-        public TimelineViewHolder(WeiboTimelineView timelineView) {
+        public TimelineViewHolder(DoubanMovieItemView timelineView) {
             super(timelineView);
 
             this.mTimelineView = timelineView;

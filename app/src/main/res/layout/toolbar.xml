@@ -8,7 +8,6 @@
     android:background="?attr/colorPrimary"
     android:contentInsetLeft="0dp"
     android:contentInsetStart="0dp"
-    android:elevation="4dp"
     android:theme="@style/ToolbarTheme"
     app:navigationIcon="@drawable/icon_back"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

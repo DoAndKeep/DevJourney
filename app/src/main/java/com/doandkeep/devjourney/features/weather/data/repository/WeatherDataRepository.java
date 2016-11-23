@@ -4,7 +4,7 @@ import com.doandkeep.devjourney.features.weather.data.entity.WeatherWrapperEntit
 import com.doandkeep.devjourney.features.weather.data.entity.mapper.WeatherEntityDataMapper;
 import com.doandkeep.devjourney.features.weather.domain.bean.Weather;
 import com.doandkeep.devjourney.features.weather.domain.repository.WeatherRepository;
-import com.doandkeep.devjourney.retrofit.ServiceGenerator;
+import com.doandkeep.devjourney.base.ServiceGenerator;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

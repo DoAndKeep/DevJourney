@@ -1,10 +1,10 @@
-package com.doandkeep.devjourney.features.weibo.timeline.view;
+package com.doandkeep.devjourney.features.douban.presentation.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.doandkeep.devjourney.R;
 
@@ -14,27 +14,27 @@ import butterknife.ButterKnife;
 /**
  * Created by zhangtao on 16/8/4.
  */
-public class TimelineTabView extends FrameLayout {
+public class DoubanMovieTabView extends FrameLayout {
 
-    @BindView(R.id.timeline_tab_icon_iv)
-    ImageView mIconIV;
+    @BindView(R.id.tab_laber_tv)
+    TextView mLaberTV;
 
-    public TimelineTabView(Context context) {
+    public DoubanMovieTabView(Context context) {
         super(context);
         init(context);
     }
 
-    public TimelineTabView(Context context, AttributeSet attrs) {
+    public DoubanMovieTabView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
     private void init(Context context) {
-        View.inflate(context, R.layout.view_weibo_timeline_tab, this);
+        View.inflate(context, R.layout.view_douban_movie_tab, this);
         ButterKnife.bind(this, this);
     }
 
-    public void setData(int iconResId) {
-        mIconIV.setImageResource(iconResId);
+    public void setData(String laber) {
+        mLaberTV.setText(laber);
     }
 }
