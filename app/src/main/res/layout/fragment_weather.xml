@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
 
-    <include layout="@layout/view_progress"/>
+    <include
+        layout="@layout/view_progress"/>
 
     <include layout="@layout/view_retry"/>
 

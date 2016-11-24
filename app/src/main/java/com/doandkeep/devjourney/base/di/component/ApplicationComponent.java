@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
 import com.doandkeep.devjourney.base.di.module.ApplicationModule;
+import com.doandkeep.devjourney.features.douban.domain.repository.DoubanMovieRepo;
 import com.doandkeep.devjourney.features.weather.domain.repository.WeatherRepository;
 
 import javax.inject.Singleton;
@@ -26,4 +27,6 @@ public interface ApplicationComponent {
     Context context();
 
     WeatherRepository weatherRepository();
+
+    DoubanMovieRepo doubanMovieRepo();
 }

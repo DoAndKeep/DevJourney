@@ -14,6 +14,7 @@ import com.doandkeep.devjourney.features.weather.presentation.presenter.WeatherP
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by zhangtao on 2016/11/9.
@@ -127,6 +128,11 @@ public class WeatherFragment extends BaseFragment implements WeatherView {
     @Override
     public Context context() {
         return this.getActivity().getApplicationContext();
+    }
+
+    @OnClick(R.id.retry_btn)
+    void onRetryBtnClicked() {
+        WeatherFragment.this.loadWeather();
     }
 
     private void loadWeather() {

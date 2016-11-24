@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/retry_btn"
         style="@style/AppTheme.Button"
         android:layout_centerInParent="true"
         android:text="重试"/>

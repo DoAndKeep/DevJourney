@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.doandkeep.devjourney.features.douban.data.entity.DoubanMovieEntity;
-import com.doandkeep.devjourney.features.douban.presentation.view.DoubanMovieItemView;
+import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMovieItemView;
 
 import java.util.List;
 

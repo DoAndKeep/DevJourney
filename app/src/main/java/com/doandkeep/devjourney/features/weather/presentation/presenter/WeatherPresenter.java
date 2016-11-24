@@ -75,7 +75,7 @@ public class WeatherPresenter implements Presenter {
         this.mWeatherView.hideRetry();
     }
 
-    private void showErrorMessgae(String msg) {
+    private void showErrorMsg(String msg) {
         this.mWeatherView.showError(msg);
     }
 
@@ -99,7 +99,7 @@ public class WeatherPresenter implements Presenter {
         public void onError(Throwable e) {
             Timber.e(e);
             WeatherPresenter.this.hideLoadingView();
-            WeatherPresenter.this.showErrorMessgae("to do with the error");
+            WeatherPresenter.this.showErrorMsg("to do with the error");
             WeatherPresenter.this.showRetryView();
         }
 

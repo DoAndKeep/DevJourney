@@ -4,6 +4,7 @@ import com.doandkeep.devjourney.base.di.PerActivity;
 import com.doandkeep.devjourney.base.di.component.ActivityComponent;
 import com.doandkeep.devjourney.base.di.component.ApplicationComponent;
 import com.doandkeep.devjourney.base.di.module.ActivityModule;
+import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMovieListFragment;
 
 import dagger.Component;
 
@@ -13,4 +14,5 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, DoubanModule.class})
 public interface DoubanComponent extends ActivityComponent {
+    void inject(DoubanMovieListFragment doubanMovieListFragment);
 }

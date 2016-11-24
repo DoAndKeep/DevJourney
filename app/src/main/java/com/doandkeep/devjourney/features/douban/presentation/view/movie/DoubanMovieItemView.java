@@ -1,4 +1,4 @@
-package com.doandkeep.devjourney.features.douban.presentation.view;
+package com.doandkeep.devjourney.features.douban.presentation.view.movie;
 
 import android.content.Context;
 import android.util.AttributeSet;
