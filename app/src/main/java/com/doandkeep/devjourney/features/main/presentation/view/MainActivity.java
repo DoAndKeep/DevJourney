@@ -1,6 +1,8 @@
 package com.doandkeep.devjourney.features.main.presentation.view;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
@@ -9,9 +11,13 @@ import com.doandkeep.devjourney.features.weather.presentation.view.WeatherActivi
 import com.doandkeep.devjourney.features.douban.presentation.view.DoubanActivity;
 import com.doandkeep.devjourney.util.view.ToolbarHelper;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActvity {
+
+    @BindView(R.id.main_root_layout)
+    View mRootLayout;
 
     @Override
     protected int getContentViewId() {
@@ -22,6 +28,18 @@ public class MainActivity extends BaseActvity {
     protected void initToolbar(ToolbarHelper toolbarHelper) {
         toolbarHelper.setTitle("首页");
         toolbarHelper.getToolbar().setNavigationIcon(null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Snackbar.make(mRootLayout, "欢迎来到Dev Journey!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("开始旅途", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // TODO
+                    }
+                }).show();
     }
 
     @OnClick(R.id.main_weather_btn)

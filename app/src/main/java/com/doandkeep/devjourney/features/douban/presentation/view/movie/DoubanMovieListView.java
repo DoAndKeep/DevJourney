@@ -11,4 +11,8 @@ import java.util.List;
 
 public interface DoubanMovieListView extends LoadDataView {
     void renderMovie(List<DoubanMovieEntity> movieList);
+
+    void showRefresh();
+
+    void hideRefresh();
 }

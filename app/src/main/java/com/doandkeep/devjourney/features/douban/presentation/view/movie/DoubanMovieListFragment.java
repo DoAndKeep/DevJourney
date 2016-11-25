@@ -3,7 +3,6 @@ package com.doandkeep.devjourney.features.douban.presentation.view.movie;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -97,18 +96,9 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadMovies();
+                refreshMovies();
             }
         });
-
-//        Snackbar.make(mSwipeRefreshLayout, "欢迎来到Dev Journey!", Snackbar.LENGTH_INDEFINITE)
-//                .setDuration(5000)
-//                .setAction("开始旅途", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                    }
-//                }).show();
-
     }
 
     @Override
@@ -155,6 +145,18 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
         return this.getActivity().getApplicationContext();
     }
 
+    @Override
+    public void showRefresh() {
+        // donothing
+    }
+
+    @Override
+    public void hideRefresh() {
+        if (mSwipeRefreshLayout.isRefreshing()) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
     @OnClick(R.id.retry_btn)
     void onRetryBtnClicked() {
         DoubanMovieListFragment.this.loadMovies();
@@ -162,32 +164,9 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
 
     private void loadMovies() {
         mMovieListPresenter.init();
-//        Timber.i("load movie");
-//        DoubanService doubanService = ServiceGenerator.createService(DoubanService.class);
-//
-//        Call<DoubanMovieListEntity> call = doubanService.movieForInTheaters("北京");
-//
-//        call.enqueue(new Callback<DoubanMovieListEntity>() {
-//            @Override
-//            public void onResponse(Call<DoubanMovieListEntity> call, Response<DoubanMovieListEntity> response) {
-//                onLoadedComplete();
-//                if (response.isSuccessful()) {
-//                    mAdapter.setData(response.body().getSubjects());
-//                } else {
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DoubanMovieListEntity> call, Throwable t) {
-//                onLoadedComplete();
-//            }
-//        });
     }
 
-    private void onLoadedComplete() {
-        if (mSwipeRefreshLayout.isRefreshing()) {
-            mSwipeRefreshLayout.setRefreshing(false);
-        }
+    private void refreshMovies() {
+        mMovieListPresenter.refresh();
     }
-
 }

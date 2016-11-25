@@ -50,14 +50,28 @@ public class DoubanMovieListPresenter implements Presenter {
         loadMovieList();
     }
 
+    public void refresh() {
+        refreshMovieList();
+    }
+
     private void loadMovieList() {
         showLoadingView();
         hideRetryView();
-        getMovieList();
+        getMovieList(false);
     }
 
-    private void getMovieList() {
-        mUseCase.execute(new GetMoiveInTheatersSubscriber());
+    private void refreshMovieList() {
+        showRefreshView();
+        getMovieList(true);
+
+    }
+
+    private void getMovieList(boolean isRefrsh) {
+        if (isRefrsh) {
+            mUseCase.execute(new RefreshMovieInTheatersSubscriber());
+        } else {
+            mUseCase.execute(new GetMoiveInTheatersSubscriber());
+        }
     }
 
     private void showLoadingView() {
@@ -66,6 +80,14 @@ public class DoubanMovieListPresenter implements Presenter {
 
     private void hideLoadingView() {
         mView.hideLoading();
+    }
+
+    private void showRefreshView() {
+        mView.showRefresh();
+    }
+
+    private void hideRefreshView() {
+        mView.hideRefresh();
     }
 
     private void showRetryView() {
@@ -96,6 +118,27 @@ public class DoubanMovieListPresenter implements Presenter {
             super.onError(e);
             DoubanMovieListPresenter.this.hideLoadingView();
             DoubanMovieListPresenter.this.showRetryView();
+            DoubanMovieListPresenter.this.showErrorMsg("do with this error");
+        }
+
+        @Override
+        public void onNext(List<DoubanMovieEntity> movies) {
+            super.onNext(movies);
+            DoubanMovieListPresenter.this.showMovieListInView(movies);
+        }
+    }
+
+    private final class RefreshMovieInTheatersSubscriber extends DefaultSubscriber<List<DoubanMovieEntity>> {
+        @Override
+        public void onCompleted() {
+            super.onCompleted();
+            DoubanMovieListPresenter.this.hideRefreshView();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+            DoubanMovieListPresenter.this.hideRefreshView();
             DoubanMovieListPresenter.this.showErrorMsg("do with this error");
         }
 
