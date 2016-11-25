@@ -33,4 +33,24 @@ public class DoubanMovieDataRepo implements DoubanMovieRepo {
             }
         });
     }
+
+    @Override
+    public Observable<List<DoubanMovieEntity>> movieListForComingSoon(String city) {
+        return ServiceGenerator.createService(DoubanService.class).movieForComingSoon(city).map(new Func1<DoubanMovieListEntity, List<DoubanMovieEntity>>() {
+            @Override
+            public List<DoubanMovieEntity> call(DoubanMovieListEntity doubanMovieListEntity) {
+                return doubanMovieListEntity.getSubjects();
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<DoubanMovieEntity>> movieListForTop250(String city) {
+        return ServiceGenerator.createService(DoubanService.class).movieForTop250(city).map(new Func1<DoubanMovieListEntity, List<DoubanMovieEntity>>() {
+            @Override
+            public List<DoubanMovieEntity> call(DoubanMovieListEntity doubanMovieListEntity) {
+                return doubanMovieListEntity.getSubjects();
+            }
+        });
+    }
 }

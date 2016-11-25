@@ -1,6 +1,8 @@
 package com.doandkeep.devjourney.features.main.presentation.view;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
@@ -31,9 +33,11 @@ public class MainActivity extends BaseActvity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         Snackbar.make(mRootLayout, "欢迎来到Dev Journey!", Snackbar.LENGTH_INDEFINITE)
+                .setDuration(5000)
                 .setAction("开始旅途", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -2,7 +2,9 @@ package com.doandkeep.devjourney.features.douban.presentation.di;
 
 import com.doandkeep.devjourney.base.di.PerActivity;
 import com.doandkeep.devjourney.base.domain.UseCase;
+import com.doandkeep.devjourney.features.douban.domain.GetMovieComingSoonUseCase;
 import com.doandkeep.devjourney.features.douban.domain.GetMovieInTheatersUseCase;
+import com.doandkeep.devjourney.features.douban.domain.GetMovieTop250UseCase;
 import com.doandkeep.devjourney.features.douban.domain.repository.DoubanMovieRepo;
 
 import javax.inject.Named;
@@ -28,5 +30,19 @@ public class DoubanModule {
     @Named("movieInTheaters")
     UseCase provideGetMovieInTheatersUseCase(DoubanMovieRepo doubanMovieRepo) {
         return new GetMovieInTheatersUseCase(doubanMovieRepo, mCity);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("movieComingSoon")
+    UseCase provideGetMovieComingSoonUseCase(DoubanMovieRepo doubanMovieRepo) {
+        return new GetMovieComingSoonUseCase(doubanMovieRepo, mCity);
+    }
+
+    @Provides
+    @PerActivity
+    @Named("movieTop250")
+    UseCase provideGetMovieTop250UseCase(DoubanMovieRepo doubanMovieRepo) {
+        return new GetMovieTop250UseCase(doubanMovieRepo, mCity);
     }
 }

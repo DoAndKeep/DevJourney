@@ -7,8 +7,8 @@ package com.doandkeep.devjourney.features.douban.presentation;
 public interface Constans {
 
     class DoubanMovieType {
-        private static final int IN_THEATERS = 0;
-        private static final int COMING_SOON = 1;
-        private static final int TOP250 = 2;
+        public static final int IN_THEATERS = 0;
+        public static final int COMING_SOON = 1;
+        public static final int TOP250 = 2;
     }
 }

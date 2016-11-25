@@ -8,8 +8,6 @@ import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMo
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * Created by zhangtao on 2016/11/23.
@@ -20,8 +18,7 @@ public class DoubanMovieListPresenter implements Presenter {
     private UseCase mUseCase;
     private DoubanMovieListView mView;
 
-    @Inject
-    public DoubanMovieListPresenter(@Named("movieInTheaters") UseCase useCase) {
+    public DoubanMovieListPresenter(UseCase useCase) {
         this.mUseCase = useCase;
     }
 
@@ -42,17 +39,19 @@ public class DoubanMovieListPresenter implements Presenter {
 
     @Override
     public void destroy() {
-
+        this.mUseCase.unsubscribe();
+        this.mView = null;
     }
-
 
     public void init() {
         loadMovieList();
     }
 
+
     public void refresh() {
         refreshMovieList();
     }
+
 
     private void loadMovieList() {
         showLoadingView();
@@ -63,14 +62,13 @@ public class DoubanMovieListPresenter implements Presenter {
     private void refreshMovieList() {
         showRefreshView();
         getMovieList(true);
-
     }
 
     private void getMovieList(boolean isRefrsh) {
         if (isRefrsh) {
-            mUseCase.execute(new RefreshMovieInTheatersSubscriber());
+            mUseCase.execute(new RefreshMoviesSubscriber());
         } else {
-            mUseCase.execute(new GetMoiveInTheatersSubscriber());
+            mUseCase.execute(new GetMoivesSubscriber());
         }
     }
 
@@ -106,7 +104,7 @@ public class DoubanMovieListPresenter implements Presenter {
         mView.renderMovie(movies);
     }
 
-    private final class GetMoiveInTheatersSubscriber extends DefaultSubscriber<List<DoubanMovieEntity>> {
+    private final class GetMoivesSubscriber extends DefaultSubscriber<List<DoubanMovieEntity>> {
         @Override
         public void onCompleted() {
             super.onCompleted();
@@ -128,7 +126,7 @@ public class DoubanMovieListPresenter implements Presenter {
         }
     }
 
-    private final class RefreshMovieInTheatersSubscriber extends DefaultSubscriber<List<DoubanMovieEntity>> {
+    private final class RefreshMoviesSubscriber extends DefaultSubscriber<List<DoubanMovieEntity>> {
         @Override
         public void onCompleted() {
             super.onCompleted();

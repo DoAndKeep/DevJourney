@@ -12,14 +12,10 @@ import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseFragment;
 import com.doandkeep.devjourney.features.douban.data.entity.DoubanMovieEntity;
 import com.doandkeep.devjourney.features.douban.presentation.DoubanMovieAdapter;
-import com.doandkeep.devjourney.features.douban.presentation.di.DoubanComponent;
-import com.doandkeep.devjourney.features.douban.presentation.presenter.DoubanMovieListPresenter;
 import com.doandkeep.devjourney.view.cyclerview.DividerItemDecoration;
 import com.doandkeep.devjourney.view.cyclerview.EndlessRecyclerViewScrollListener;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,8 +24,6 @@ import butterknife.OnClick;
  * Created by zhangtao on 16/8/3.
  */
 public class DoubanMovieListFragment extends BaseFragment implements DoubanMovieListView {
-
-    private static final String ARG_MOVIE_TYPE = "ARG_MOVIE_TYPE";
 
     @BindView(R.id.movie_srl)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -43,26 +37,9 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
     private LinearLayoutManager mLayoutManager;
     private DoubanMovieAdapter mAdapter;
 
-    private int mType;
-
-    @Inject
-    DoubanMovieListPresenter mMovieListPresenter;
-
-    public static DoubanMovieListFragment newInstance(int type) {
-        Bundle args = new Bundle();
-        args.putInt(ARG_MOVIE_TYPE, type);
-        DoubanMovieListFragment fragment = new DoubanMovieListFragment();
-        fragment.setRetainInstance(true);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getComponent(DoubanComponent.class).inject(this);
-
-        mType = getArguments().getInt(ARG_MOVIE_TYPE);
     }
 
     @Override
@@ -104,7 +81,6 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mMovieListPresenter.setView(this);
         if (savedInstanceState == null) {
             loadMovies();
         }
@@ -162,11 +138,9 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
         DoubanMovieListFragment.this.loadMovies();
     }
 
-    private void loadMovies() {
-        mMovieListPresenter.init();
+    protected void loadMovies() {
     }
 
-    private void refreshMovies() {
-        mMovieListPresenter.refresh();
+    protected void refreshMovies() {
     }
 }

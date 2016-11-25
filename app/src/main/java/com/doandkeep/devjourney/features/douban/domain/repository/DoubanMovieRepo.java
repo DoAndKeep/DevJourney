@@ -12,4 +12,8 @@ import rx.Observable;
 
 public interface DoubanMovieRepo {
     Observable<List<DoubanMovieEntity>> movieListForInTheaters(String city);
+
+    Observable<List<DoubanMovieEntity>> movieListForComingSoon(String city);
+
+    Observable<List<DoubanMovieEntity>> movieListForTop250(String city);
 }

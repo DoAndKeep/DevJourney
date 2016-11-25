@@ -6,8 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
-import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMovieListFragment;
 import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMovieTabView;
+import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMoviesComingSoonFragment;
+import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMoviesInTheatersFragment;
+import com.doandkeep.devjourney.features.douban.presentation.view.movie.DoubanMoviesTop250Fragment;
 
 /**
  * Created by zhangtao on 16/8/3.
@@ -26,7 +28,16 @@ public class DoubanMoviePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return DoubanMovieListFragment.newInstance(0);
+        switch (position) {
+            case 0:
+                return new DoubanMoviesInTheatersFragment();
+            case 1:
+                return new DoubanMoviesComingSoonFragment();
+            case 2:
+                return new DoubanMoviesTop250Fragment();
+            default:
+                return new DoubanMoviesInTheatersFragment();
+        }
     }
 
     @Override

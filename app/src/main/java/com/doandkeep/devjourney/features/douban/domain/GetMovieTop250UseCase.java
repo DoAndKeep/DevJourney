@@ -9,18 +9,18 @@ import rx.Observable;
  * Created by zhangtao on 2016/11/24.
  */
 
-public class GetMovieInTheatersUseCase extends UseCase {
+public class GetMovieTop250UseCase extends UseCase {
 
     private DoubanMovieRepo mDoubanMovieRepo;
     private String mCity;
 
-    public GetMovieInTheatersUseCase(DoubanMovieRepo doubanMovieRepo, String city) {
+    public GetMovieTop250UseCase(DoubanMovieRepo doubanMovieRepo, String city) {
         this.mDoubanMovieRepo = doubanMovieRepo;
         this.mCity = city;
     }
 
     @Override
     protected Observable buildUseCaseObservable() {
-        return this.mDoubanMovieRepo.movieListForInTheaters(mCity);
+        return this.mDoubanMovieRepo.movieListForTop250(mCity);
     }
 }
