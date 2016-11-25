@@ -12,6 +12,7 @@ import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseFragment;
 import com.doandkeep.devjourney.features.douban.data.entity.DoubanMovieEntity;
 import com.doandkeep.devjourney.features.douban.presentation.DoubanMovieAdapter;
+import com.doandkeep.devjourney.features.douban.presentation.presenter.DoubanMovieListPresenter;
 import com.doandkeep.devjourney.view.cyclerview.DividerItemDecoration;
 import com.doandkeep.devjourney.view.cyclerview.EndlessRecyclerViewScrollListener;
 
@@ -36,6 +37,8 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
 
     private LinearLayoutManager mLayoutManager;
     private DoubanMovieAdapter mAdapter;
+
+    protected DoubanMovieListPresenter movieListPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,9 +84,28 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        movieListPresenter.setView(this);
         if (savedInstanceState == null) {
             loadMovies();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.movieListPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.movieListPresenter.pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.movieListPresenter.destroy();
     }
 
     @Override
@@ -138,9 +160,11 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
         DoubanMovieListFragment.this.loadMovies();
     }
 
-    protected void loadMovies() {
+    private void loadMovies() {
+        movieListPresenter.init();
     }
 
-    protected void refreshMovies() {
+    private void refreshMovies() {
+        movieListPresenter.refresh();
     }
 }
