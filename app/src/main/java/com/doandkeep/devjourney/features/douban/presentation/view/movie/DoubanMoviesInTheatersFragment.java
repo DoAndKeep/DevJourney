@@ -3,6 +3,7 @@ package com.doandkeep.devjourney.features.douban.presentation.view.movie;
 import android.os.Bundle;
 
 import com.doandkeep.devjourney.features.douban.presentation.di.DoubanComponent;
+import com.doandkeep.devjourney.features.douban.presentation.presenter.DoubanMovieListPresenter;
 import com.doandkeep.devjourney.features.douban.presentation.presenter.DoubanMoviesInTheatersPresenter;
 
 import javax.inject.Inject;
@@ -23,6 +24,10 @@ public class DoubanMoviesInTheatersFragment extends DoubanMovieListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getComponent(DoubanComponent.class).inject(this);
-        super.movieListPresenter = mInTheatersMoviesPresenter;
+    }
+
+    @Override
+    protected DoubanMovieListPresenter getMovieListPresenter() {
+        return mInTheatersMoviesPresenter;
     }
 }

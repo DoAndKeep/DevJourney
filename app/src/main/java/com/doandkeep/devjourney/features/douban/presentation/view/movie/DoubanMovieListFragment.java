@@ -24,7 +24,7 @@ import butterknife.OnClick;
 /**
  * Created by zhangtao on 16/8/3.
  */
-public class DoubanMovieListFragment extends BaseFragment implements DoubanMovieListView {
+public abstract class DoubanMovieListFragment extends BaseFragment implements DoubanMovieListView {
 
     @BindView(R.id.movie_srl)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -38,7 +38,7 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
     private LinearLayoutManager mLayoutManager;
     private DoubanMovieAdapter mAdapter;
 
-    protected DoubanMovieListPresenter movieListPresenter;
+//    protected DoubanMovieListPresenter movieListPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        movieListPresenter.setView(this);
+        getMovieListPresenter().setView(this);
         if (savedInstanceState == null) {
             loadMovies();
         }
@@ -93,19 +93,19 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
     @Override
     public void onResume() {
         super.onResume();
-        this.movieListPresenter.resume();
+        this.getMovieListPresenter().resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        this.movieListPresenter.pause();
+        this.getMovieListPresenter().pause();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        this.movieListPresenter.destroy();
+        this.getMovieListPresenter().destroy();
     }
 
     @Override
@@ -160,11 +160,14 @@ public class DoubanMovieListFragment extends BaseFragment implements DoubanMovie
         DoubanMovieListFragment.this.loadMovies();
     }
 
+    protected abstract DoubanMovieListPresenter getMovieListPresenter();
+
     private void loadMovies() {
-        movieListPresenter.init();
+        getMovieListPresenter().init();
     }
 
     private void refreshMovies() {
-        movieListPresenter.refresh();
+        getMovieListPresenter().refresh();
     }
+
 }
