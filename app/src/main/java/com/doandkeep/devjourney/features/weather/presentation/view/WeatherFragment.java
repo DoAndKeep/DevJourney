@@ -41,6 +41,8 @@ public class WeatherFragment extends BaseFragment implements WeatherView {
         setRetainInstance(true);
     }
 
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -98,6 +100,11 @@ public class WeatherFragment extends BaseFragment implements WeatherView {
         if (weatherModel != null) {
             mWeatherTV.setText(weatherModel.getWeather());
         }
+    }
+
+    @Override
+    public void setPresenter(Object presenter) {
+
     }
 
     @Override

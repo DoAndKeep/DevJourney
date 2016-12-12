@@ -12,16 +12,16 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.Subscriptions;
 
 /**
- * 用例的抽象类(Clean Architecture中的交互器)。
+ * Use cases are the entry points to the domain layer.
  */
-public abstract class UseCase {
+public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase.ResponseValues> {
 
     private Subscription mSubscription = Subscriptions.empty();
 
-    protected abstract Observable buildUseCaseObservable();
+    protected abstract Observable buildUseCaseObservable(Q requestValues);
 
-    public void execute(Subscriber useCaseSubscriber) {
-        this.mSubscription = this.buildUseCaseObservable()
+    public void execute(Q requestValues, Subscriber<P> useCaseSubscriber) {
+        this.mSubscription = this.buildUseCaseObservable(requestValues)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(useCaseSubscriber);
@@ -31,6 +31,14 @@ public abstract class UseCase {
         if (!mSubscription.isUnsubscribed()) {
             mSubscription.unsubscribe();
         }
+    }
+
+    public interface RequestValues {
+
+    }
+
+    public interface ResponseValues {
+
     }
 
 }

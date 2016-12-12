@@ -3,6 +3,8 @@ package com.doandkeep.devjourney.features.weather.presentation.presenter;
 import com.doandkeep.devjourney.base.domain.DefaultSubscriber;
 import com.doandkeep.devjourney.base.domain.UseCase;
 import com.doandkeep.devjourney.base.presentation.Presenter;
+import com.doandkeep.devjourney.features.douban.movie.domain.GetComingSoonMovie;
+import com.doandkeep.devjourney.features.weather.domain.GetWeather;
 import com.doandkeep.devjourney.features.weather.domain.bean.Weather;
 import com.doandkeep.devjourney.features.weather.presentation.model.WeatherModel;
 import com.doandkeep.devjourney.features.weather.presentation.model.WeatherModelDataMapper;
@@ -86,7 +88,7 @@ public class WeatherPresenter implements Presenter {
 
     private void getWeather() {
         Timber.i("getWeather invoked");
-        this.mWeatherUseCase.execute(new WeatherSubscriber());
+        this.mWeatherUseCase.execute(new GetWeather.RequestValues(), new WeatherSubscriber());
     }
 
     private final class WeatherSubscriber extends DefaultSubscriber<Weather> {

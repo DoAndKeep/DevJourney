@@ -10,7 +10,7 @@ import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
 import com.doandkeep.devjourney.features.demo.DemoActivity;
 import com.doandkeep.devjourney.features.weather.presentation.view.WeatherActivity;
-import com.doandkeep.devjourney.features.douban.presentation.view.DoubanActivity;
+import com.doandkeep.devjourney.features.douban.DoubanActivity;
 import com.doandkeep.devjourney.util.view.ToolbarHelper;
 
 import butterknife.BindView;
