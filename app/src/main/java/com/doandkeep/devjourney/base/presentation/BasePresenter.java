@@ -6,7 +6,10 @@ package com.doandkeep.devjourney.base.presentation;
 
 public interface BasePresenter {
 
-    void subscribe();
+    void resume();
 
-    void unsubscribe();
+    void pause();
+
+    void destroy();
+    
 }

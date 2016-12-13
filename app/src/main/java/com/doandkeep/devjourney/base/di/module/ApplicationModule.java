@@ -9,7 +9,7 @@ import android.content.Context;
 import com.doandkeep.devjourney.AndroidApplication;
 import com.doandkeep.devjourney.features.douban.movie.data.repository.DoubanMovieDataRepo;
 import com.doandkeep.devjourney.features.douban.movie.domain.repository.DoubanMovieRepo;
-import com.doandkeep.devjourney.features.weather.data.repository.WeatherDataRepository;
+import com.doandkeep.devjourney.features.weather.data.WeatherDataRepository;
 import com.doandkeep.devjourney.features.weather.domain.repository.WeatherRepository;
 
 import javax.inject.Singleton;

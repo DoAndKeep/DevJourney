@@ -1,14 +1,13 @@
 package com.doandkeep.devjourney.features.douban.movie.presentation.model;
 
-import com.doandkeep.devjourney.base.data.entity.IDataEntity;
-import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
+import com.doandkeep.devjourney.base.presentation.BaseModel;
 
 import java.util.List;
 
 /**
  * Created by zhangtao on 2016/11/23.
  */
-public class MovieListModel implements IDataEntity {
+public class MovieListModel extends BaseModel {
     private int count;
     private int start;
     private int total;

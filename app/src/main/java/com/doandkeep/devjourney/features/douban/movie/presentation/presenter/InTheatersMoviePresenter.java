@@ -32,15 +32,19 @@ public class InTheatersMoviePresenter implements InTheatersMovieContract.Present
         mInTheatersMovieView.setPresenter(this);
     }
 
-
     @Override
-    public void subscribe() {
-        loadMovieList();
+    public void resume() {
+
     }
 
     @Override
-    public void unsubscribe() {
+    public void pause() {
 
+    }
+
+    @Override
+    public void destroy() {
+        loadMovieList();
     }
 
     public void refresh() {

@@ -1,12 +1,12 @@
 package com.doandkeep.devjourney.features.douban.movie.presentation.model;
 
-import com.doandkeep.devjourney.base.data.entity.IDataEntity;
+import com.doandkeep.devjourney.base.presentation.BaseModel;
 
 /**
  * Created by zhangtao on 2016/11/23.
  */
 
-public class MovieRatingmodel implements IDataEntity {
+public class MovieRatingmodel extends BaseModel {
     private int max;
     private int min;
     private float average;

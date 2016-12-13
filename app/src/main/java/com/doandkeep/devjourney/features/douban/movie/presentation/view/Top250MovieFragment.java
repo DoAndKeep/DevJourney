@@ -52,13 +52,13 @@ public class Top250MovieFragment extends BaseFragment implements Top250MovieCont
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+        mPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+        mPresenter.pause();
     }
 
     @Override

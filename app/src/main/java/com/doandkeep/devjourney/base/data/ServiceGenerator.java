@@ -1,6 +1,5 @@
-package com.doandkeep.devjourney.base;
+package com.doandkeep.devjourney.base.data;
 
-import com.doandkeep.devjourney.AndroidApplication;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.io.IOException;

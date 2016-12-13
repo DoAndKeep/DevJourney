@@ -9,7 +9,7 @@ import android.view.View;
 import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseActvity;
 import com.doandkeep.devjourney.features.demo.DemoActivity;
-import com.doandkeep.devjourney.features.weather.presentation.view.WeatherActivity;
+import com.doandkeep.devjourney.features.weather.presentation.view.WeatherDetailActivity;
 import com.doandkeep.devjourney.features.douban.DoubanActivity;
 import com.doandkeep.devjourney.util.view.ToolbarHelper;
 
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActvity {
 
     @OnClick(R.id.main_weather_btn)
     public void forwardWeather() {
-        Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
+        Intent intent = new Intent(MainActivity.this, WeatherDetailActivity.class);
         startActivity(intent);
     }
 

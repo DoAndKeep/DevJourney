@@ -52,13 +52,13 @@ public class InTheatersMovieFragment extends BaseFragment implements InTheatersM
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+        mPresenter.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+        mPresenter.pause();
     }
 
     @Override

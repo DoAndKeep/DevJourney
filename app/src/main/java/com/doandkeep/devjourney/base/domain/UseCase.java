@@ -27,7 +27,7 @@ public abstract class UseCase<Q extends UseCase.RequestValues, P extends UseCase
                 .subscribe(useCaseSubscriber);
     }
 
-    public void unsubscribe() {
+    public void cancel() {
         if (!mSubscription.isUnsubscribed()) {
             mSubscription.unsubscribe();
         }

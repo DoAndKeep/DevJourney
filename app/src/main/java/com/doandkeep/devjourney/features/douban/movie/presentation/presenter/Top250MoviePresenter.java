@@ -33,13 +33,18 @@ public class Top250MoviePresenter implements Top250MovieContract.Presenter {
     }
 
     @Override
-    public void subscribe() {
-        loadMovieList();
+    public void resume() {
+
     }
 
     @Override
-    public void unsubscribe() {
+    public void pause() {
 
+    }
+
+    @Override
+    public void destroy() {
+        loadMovieList();
     }
 
     public void refresh() {

@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.doandkeep.devjourney.base.di.HasComponent;
-
 import butterknife.ButterKnife;
 
 /**
@@ -29,10 +27,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected void initView(View view, Bundle savedInstanceState) {
 
-    }
-
-    protected <C> C getComponent(Class<C> componentType) {
-        return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
     }
 
 }

@@ -1,12 +1,12 @@
 package com.doandkeep.devjourney.features.douban.movie.presentation.model;
 
-import com.doandkeep.devjourney.base.data.entity.IDataEntity;
+import com.doandkeep.devjourney.base.presentation.BaseModel;
 
 /**
  * Created by zhangtao on 2016/11/23.
  */
 
-public class MovieModel implements IDataEntity {
+public class MovieModel extends BaseModel {
     /**
      * 条目id
      */

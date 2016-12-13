@@ -1,6 +1,6 @@
 package com.doandkeep.devjourney.features.douban.movie.data.repository;
 
-import com.doandkeep.devjourney.base.ServiceGenerator;
+import com.doandkeep.devjourney.base.data.ServiceGenerator;
 import com.doandkeep.devjourney.features.douban.movie.data.DoubanService;
 import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
 import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieListModel;

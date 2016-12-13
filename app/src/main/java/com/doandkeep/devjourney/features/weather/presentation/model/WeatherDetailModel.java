@@ -1,26 +1,58 @@
 package com.doandkeep.devjourney.features.weather.presentation.model;
 
+import com.doandkeep.devjourney.base.presentation.BaseModel;
+
 /**
- * presentation层级的天气
+ * 天气详情Model
  * Created by zhangtao on 2016/11/8.
  */
-public class WeatherModel {
+public class WeatherDetailModel extends BaseModel {
     private String city;
     private String pinyin;
     private String citycode;
+    /**
+     * 日期
+     */
     private String date;
+    /**
+     * 发布时间
+     */
     private String time;
     private String postCode;
     private String longitude;
     private String latitude;
     private String altitude;
+    /**
+     * 天气情况
+     */
     private String weather;
+    /**
+     * 气温
+     */
     private String temp;
+    /**
+     * 最低气温
+     */
     private String l_tmp;
+    /**
+     * 最高气温
+     */
     private String h_tmp;
+    /**
+     * 风向
+     */
     private String WD;
+    /**
+     * 风力
+     */
     private String WS;
+    /**
+     * 日出时间
+     */
     private String sunrise;
+    /**
+     * 日落时间
+     */
     private String sunset;
 
     public String getCity() {
@@ -157,5 +189,22 @@ public class WeatherModel {
 
     public void setSunset(String sunset) {
         this.sunset = sunset;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherDetailModel{" +
+                "city='" + city + '\'' +
+                ", weather='" + weather + '\'' +
+                ", temp='" + temp + '\'' +
+                ", l_tmp='" + l_tmp + '\'' +
+                ", h_tmp='" + h_tmp + '\'' +
+                ", WD='" + WD + '\'' +
+                ", WS='" + WS + '\'' +
+                ", sunrise='" + sunrise + '\'' +
+                ", sunset='" + sunset + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

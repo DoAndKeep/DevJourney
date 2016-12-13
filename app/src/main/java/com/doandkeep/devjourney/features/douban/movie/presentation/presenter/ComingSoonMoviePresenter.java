@@ -33,14 +33,20 @@ public class ComingSoonMoviePresenter implements ComingSoonMovieContract.Present
     }
 
     @Override
-    public void subscribe() {
-        loadMovieList();
+    public void resume() {
+
     }
 
     @Override
-    public void unsubscribe() {
+    public void pause() {
 
     }
+
+    @Override
+    public void destroy() {
+        loadMovieList();
+    }
+
 
     public void refresh() {
         refreshMovieList();

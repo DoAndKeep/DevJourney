@@ -1,12 +1,15 @@
-package com.doandkeep.devjourney.features.weather.data.entity;
+package com.doandkeep.devjourney.features.weather.presentation.model;
+
+import com.doandkeep.devjourney.base.presentation.BaseModel;
 
 /**
+ * 天气详情包装Model
  * Created by zhangtao on 16/8/11.
  */
-public class WeatherWrapperEntity {
+public class WeatherDetailWrapperModel extends BaseModel {
     private String errNum;
     private String errMsg;
-    private WeatherEntity retData;
+    private WeatherDetailModel retData;
 
     public String getErrNum() {
         return errNum;
@@ -24,11 +27,11 @@ public class WeatherWrapperEntity {
         this.errMsg = errMsg;
     }
 
-    public WeatherEntity getRetData() {
+    public WeatherDetailModel getRetData() {
         return retData;
     }
 
-    public void setRetData(WeatherEntity retData) {
+    public void setRetData(WeatherDetailModel retData) {
         this.retData = retData;
     }
 }
