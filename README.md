@@ -1,5 +1,5 @@
 # DevJourney
-记录Android开发路上的点点滴滴.
+DevJourney采用了MVP+Clean+Dagger+RxJava架构，网络框架使用的是Retrofit。目前"天气"页面已完全遵循了此架构，并会继续完善，后续其他页面及技术会持续更新。
 
 ##Android View
 
