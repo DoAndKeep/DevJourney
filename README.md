@@ -1,5 +1,5 @@
 # DevJourney
-DevJourney采用了MVP+Clean+Dagger+RxJava架构，网络框架使用的是Retrofit。目前"天气"页面已完全遵循了此架构，并会继续完善，后续其他页面及技术会持续更新。
+DevJourney采用了MVP+Clean+Dagger架构，网络框架使用的是Retrofit+RxJava。
 
 ##Android View
 
