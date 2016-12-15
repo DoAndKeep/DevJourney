@@ -1,30 +1,27 @@
 package com.doandkeep.devjourney.features.douban.movie.presentation.presenter;
 
-import com.doandkeep.devjourney.base.domain.DefaultSubscriber;
 import com.doandkeep.devjourney.base.domain.UseCase;
+import com.doandkeep.devjourney.base.presentation.ErrorModel;
 import com.doandkeep.devjourney.features.douban.movie.domain.GetComingSoonMovie;
 import com.doandkeep.devjourney.features.douban.movie.presentation.contract.ComingSoonMovieContract;
-import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
-
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 
 /**
+ * 即将上映电影Presenter
  * Created by zhangtao on 2016/11/23.
  */
 
 public class ComingSoonMoviePresenter implements ComingSoonMovieContract.Presenter {
 
     private final ComingSoonMovieContract.View mComingSoonMovieView;
-    private final UseCase mUseCase;
+    private final GetComingSoonMovie mGetComingSoonMovie;
 
     @Inject
-    public ComingSoonMoviePresenter(ComingSoonMovieContract.View comingSoonMovieView, @Named("movieComingSoon") UseCase useCase) {
+    public ComingSoonMoviePresenter(ComingSoonMovieContract.View comingSoonMovieView, GetComingSoonMovie getComingSoonMovie) {
         mComingSoonMovieView = comingSoonMovieView;
-        mUseCase = useCase;
+        mGetComingSoonMovie = getComingSoonMovie;
     }
 
     @Inject
@@ -44,74 +41,62 @@ public class ComingSoonMoviePresenter implements ComingSoonMovieContract.Present
 
     @Override
     public void destroy() {
-        loadMovieList();
+        mGetComingSoonMovie.cancel();
     }
 
-
-    public void refresh() {
-        refreshMovieList();
-    }
-
-    private void loadMovieList() {
+    @Override
+    public void loadMovies(int count) {
         mComingSoonMovieView.showLoading();
         mComingSoonMovieView.hideRetry();
-        getMovieList(false);
+        mGetComingSoonMovie.execute(new GetComingSoonMovie.RequestValues(0, count), new UseCase.UseCaseCallback<GetComingSoonMovie.ResponseValues>() {
+            @Override
+            public void onSuccess(GetComingSoonMovie.ResponseValues response) {
+                mComingSoonMovieView.hideLoading();
+                mComingSoonMovieView.showMoives(response.getMovieListModel());
+            }
+
+            @Override
+            public void onError(ErrorModel errorModel) {
+                mComingSoonMovieView.hideLoading();
+                mComingSoonMovieView.showRetry();
+                mComingSoonMovieView.showError(errorModel.getMessage());
+            }
+        });
     }
 
-    private void refreshMovieList() {
+    @Override
+    public void refreshMovies(int count) {
         mComingSoonMovieView.showRefresh();
-        getMovieList(true);
+        mGetComingSoonMovie.execute(new GetComingSoonMovie.RequestValues(0, count), new UseCase.UseCaseCallback<GetComingSoonMovie.ResponseValues>() {
+            @Override
+            public void onSuccess(GetComingSoonMovie.ResponseValues response) {
+                mComingSoonMovieView.hideRefresh();
+                mComingSoonMovieView.showMoives(response.getMovieListModel());
+            }
+
+            @Override
+            public void onError(ErrorModel errorModel) {
+                mComingSoonMovieView.hideRefresh();
+                mComingSoonMovieView.showError(errorModel.getMessage());
+            }
+        });
     }
 
-    private void getMovieList(boolean isRefrsh) {
-        if (isRefrsh) {
-            mUseCase.execute(new GetComingSoonMovie.RequestValues(), new RefreshMoviesSubscriber());
-        } else {
-            mUseCase.execute(new GetComingSoonMovie.RequestValues(), new GetMoivesSubscriber());
-        }
+    @Override
+    public void loadMoreMovies(int start, int count) {
+        mComingSoonMovieView.showLoadingMore();
+        mGetComingSoonMovie.execute(new GetComingSoonMovie.RequestValues(start, count), new UseCase.UseCaseCallback<GetComingSoonMovie.ResponseValues>() {
+            @Override
+            public void onSuccess(GetComingSoonMovie.ResponseValues response) {
+                mComingSoonMovieView.hideLoadingMore();
+                mComingSoonMovieView.showMoreMovies(response.getMovieListModel());
+            }
+
+            @Override
+            public void onError(ErrorModel errorModel) {
+                mComingSoonMovieView.hideLoadingMore();
+                mComingSoonMovieView.showError(errorModel.getMessage());
+            }
+        });
     }
-
-    private final class GetMoivesSubscriber extends DefaultSubscriber<List<MovieModel>> {
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            mComingSoonMovieView.hideLoading();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-            mComingSoonMovieView.hideLoading();
-            mComingSoonMovieView.showRetry();
-            mComingSoonMovieView.showError("do with this error");
-        }
-
-        @Override
-        public void onNext(List<MovieModel> movies) {
-            super.onNext(movies);
-            mComingSoonMovieView.showMoives(movies);
-        }
-    }
-
-    private final class RefreshMoviesSubscriber extends DefaultSubscriber<List<MovieModel>> {
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            mComingSoonMovieView.hideRefresh();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-            mComingSoonMovieView.hideRefresh();
-            mComingSoonMovieView.showError("do with this error");
-        }
-
-        @Override
-        public void onNext(List<MovieModel> movies) {
-            super.onNext(movies);
-            mComingSoonMovieView.showMoives(movies);
-        }
-    }
-
 }

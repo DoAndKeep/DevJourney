@@ -1,30 +1,27 @@
 package com.doandkeep.devjourney.features.douban.movie.presentation.presenter;
 
-import com.doandkeep.devjourney.base.domain.DefaultSubscriber;
 import com.doandkeep.devjourney.base.domain.UseCase;
+import com.doandkeep.devjourney.base.presentation.ErrorModel;
 import com.doandkeep.devjourney.features.douban.movie.domain.GetTop250Movie;
 import com.doandkeep.devjourney.features.douban.movie.presentation.contract.Top250MovieContract;
-import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
-
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 
 /**
+ * 获取Top250电影Presenter
  * Created by zhangtao on 2016/11/23.
  */
 
 public class Top250MoviePresenter implements Top250MovieContract.Presenter {
 
     private final Top250MovieContract.View mTop250MovieView;
-    private final UseCase mUseCase;
+    private final GetTop250Movie mGetTop250Movie;
 
     @Inject
-    public Top250MoviePresenter(Top250MovieContract.View top250MovieView, @Named("movieTop250") UseCase useCase) {
+    public Top250MoviePresenter(Top250MovieContract.View top250MovieView, GetTop250Movie getTop250Movie) {
         mTop250MovieView = top250MovieView;
-        mUseCase = useCase;
+        mGetTop250Movie = getTop250Movie;
     }
 
     @Inject
@@ -44,73 +41,63 @@ public class Top250MoviePresenter implements Top250MovieContract.Presenter {
 
     @Override
     public void destroy() {
-        loadMovieList();
+        mGetTop250Movie.cancel();
     }
 
-    public void refresh() {
-        refreshMovieList();
-    }
-
-    private void loadMovieList() {
+    @Override
+    public void loadMovies(int count) {
         mTop250MovieView.showLoading();
         mTop250MovieView.hideRetry();
-        getMovieList(false);
+        mGetTop250Movie.execute(new GetTop250Movie.RequestValues(0, count), new UseCase.UseCaseCallback<GetTop250Movie.ResponseValues>() {
+            @Override
+            public void onSuccess(GetTop250Movie.ResponseValues response) {
+                mTop250MovieView.hideLoading();
+                mTop250MovieView.showMoives(response.getMovieListModel());
+            }
+
+            @Override
+            public void onError(ErrorModel errorModel) {
+                mTop250MovieView.hideLoading();
+                mTop250MovieView.showRetry();
+                mTop250MovieView.showError(errorModel.getMessage());
+            }
+        });
     }
 
-    private void refreshMovieList() {
+    @Override
+    public void refreshMovies(int count) {
         mTop250MovieView.showRefresh();
-        getMovieList(true);
+        mGetTop250Movie.execute(new GetTop250Movie.RequestValues(0, count), new UseCase.UseCaseCallback<GetTop250Movie.ResponseValues>() {
+            @Override
+            public void onSuccess(GetTop250Movie.ResponseValues response) {
+                mTop250MovieView.hideRefresh();
+                mTop250MovieView.showMoives(response.getMovieListModel());
+            }
+
+            @Override
+            public void onError(ErrorModel errorModel) {
+                mTop250MovieView.hideRefresh();
+                mTop250MovieView.showError(errorModel.getMessage());
+            }
+        });
     }
 
-    private void getMovieList(boolean isRefrsh) {
-        if (isRefrsh) {
-            mUseCase.execute(new GetTop250Movie.RequestValues(), new RefreshMoviesSubscriber());
-        } else {
-            mUseCase.execute(new GetTop250Movie.RequestValues(), new GetMoivesSubscriber());
-        }
-    }
+    @Override
+    public void loadMoreMovies(int start, int count) {
+        mTop250MovieView.showLoadingMore();
+        mGetTop250Movie.execute(new GetTop250Movie.RequestValues(start, count), new UseCase.UseCaseCallback<GetTop250Movie.ResponseValues>() {
+            @Override
+            public void onSuccess(GetTop250Movie.ResponseValues response) {
+                mTop250MovieView.hideLoadingMore();
+                mTop250MovieView.showMoreMovies(response.getMovieListModel());
+            }
 
-    private final class GetMoivesSubscriber extends DefaultSubscriber<List<MovieModel>> {
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            mTop250MovieView.hideLoading();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-            mTop250MovieView.hideLoading();
-            mTop250MovieView.showRetry();
-            mTop250MovieView.showError("do with this error");
-        }
-
-        @Override
-        public void onNext(List<MovieModel> movies) {
-            super.onNext(movies);
-            mTop250MovieView.showMoives(movies);
-        }
-    }
-
-    private final class RefreshMoviesSubscriber extends DefaultSubscriber<List<MovieModel>> {
-        @Override
-        public void onCompleted() {
-            super.onCompleted();
-            mTop250MovieView.hideRefresh();
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-            mTop250MovieView.hideRefresh();
-            mTop250MovieView.showError("do with this error");
-        }
-
-        @Override
-        public void onNext(List<MovieModel> movies) {
-            super.onNext(movies);
-            mTop250MovieView.showMoives(movies);
-        }
+            @Override
+            public void onError(ErrorModel errorModel) {
+                mTop250MovieView.hideLoadingMore();
+                mTop250MovieView.showError(errorModel.getMessage());
+            }
+        });
     }
 
 }

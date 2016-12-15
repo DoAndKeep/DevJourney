@@ -15,8 +15,8 @@ public interface DoubanService {
     Observable<MovieListModel> movieForInTheaters(@Query("city") String city);
 
     @GET("movie/coming_soon")
-    Observable<MovieListModel> movieForComingSoon();
+    Observable<MovieListModel> movieForComingSoon(@Query("start") int start, @Query("count") int count);
 
     @GET("movie/top250")
-    Observable<MovieListModel> movieForTop250();
+    Observable<MovieListModel> movieForTop250(@Query("start") int start, @Query("count") int count);
 }

@@ -1,8 +1,8 @@
 package com.doandkeep.devjourney.features.douban.movie.domain.repository;
 
-import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
-
-import java.util.List;
+import com.doandkeep.devjourney.features.douban.movie.domain.GetComingSoonMovie;
+import com.doandkeep.devjourney.features.douban.movie.domain.GetInTheatersMovie;
+import com.doandkeep.devjourney.features.douban.movie.domain.GetTop250Movie;
 
 import rx.Observable;
 
@@ -11,9 +11,9 @@ import rx.Observable;
  */
 
 public interface DoubanMovieRepo {
-    Observable<List<MovieModel>> movieListForInTheaters(String city);
+    Observable<GetInTheatersMovie.ResponseValues> movieListForInTheaters(String city);
 
-    Observable<List<MovieModel>> movieListForComingSoon();
+    Observable<GetComingSoonMovie.ResponseValues> movieListForComingSoon(int start, int count);
 
-    Observable<List<MovieModel>> movieListForTop250();
+    Observable<GetTop250Movie.ResponseValues> movieListForTop250(int start, int count);
 }

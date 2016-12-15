@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 
 /**
+ * 豆瓣电影Activity
  * Created by zhangtao on 16/8/3.
  */
 public class DoubanMovieActivity extends BaseActvity {

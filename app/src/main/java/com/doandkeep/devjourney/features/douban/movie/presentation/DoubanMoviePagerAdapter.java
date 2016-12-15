@@ -6,16 +6,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
+import com.doandkeep.devjourney.features.douban.movie.presentation.view.DoubanMovieFragment;
 import com.doandkeep.devjourney.features.douban.movie.presentation.view.item.DoubanMovieTabView;
 
 import java.util.List;
 
 /**
+ * 豆瓣电影PagerAdapter
  * Created by zhangtao on 16/8/3.
  */
 public class DoubanMoviePagerAdapter extends FragmentPagerAdapter {
-
-    private static final String[] PAGE_LABER = {"正在热映", "即将上映", "Top250"};
 
     private Context mContext;
     private List<Fragment> mFragments;
@@ -38,7 +38,10 @@ public class DoubanMoviePagerAdapter extends FragmentPagerAdapter {
 
     public View getTabView(int position) {
         DoubanMovieTabView tabView = new DoubanMovieTabView(mContext);
-        tabView.setData(PAGE_LABER[position]);
+        Fragment fragment = getItem(position);
+        if (fragment instanceof DoubanMovieFragment) {
+            tabView.setData(((DoubanMovieFragment) fragment).getLaber());
+        }
         return tabView;
     }
 }

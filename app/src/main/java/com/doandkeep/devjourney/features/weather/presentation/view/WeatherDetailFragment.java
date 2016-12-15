@@ -9,6 +9,7 @@ import com.doandkeep.devjourney.R;
 import com.doandkeep.devjourney.base.presentation.BaseFragment;
 import com.doandkeep.devjourney.features.weather.presentation.WeatherDetailContract;
 import com.doandkeep.devjourney.features.weather.presentation.model.WeatherDetailModel;
+import com.doandkeep.devjourney.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -58,8 +59,8 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onDestroy() {
+        super.onDestroy();
         mWeatherDetailPresenter.destroy();
     }
 
@@ -71,11 +72,6 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
     @Override
     public void showWeatherDetail(WeatherDetailModel weatherDetailModel) {
         mWeatherTV.setText(weatherDetailModel.toString());
-    }
-
-    @Override
-    public boolean isActive() {
-        return isAdded();
     }
 
     @Override
@@ -100,12 +96,12 @@ public class WeatherDetailFragment extends BaseFragment implements WeatherDetail
 
     @Override
     public void showError(String msg) {
-        // TODO show toast
+        ToastUtils.showErrorToase(context(), msg);
     }
 
     @Override
     public Context context() {
-        return getActivity().getApplicationContext();
+        return getContext().getApplicationContext();
     }
 
     @OnClick(R.id.retry_btn)

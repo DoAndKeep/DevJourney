@@ -7,38 +7,32 @@ import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieLi
 import rx.Observable;
 
 /**
- * 获取即将上映电影用例
+ * 获取正在热映电影UseCase
  * Created by zhangtao on 2016/11/24.
  */
 
-public class GetComingSoonMovie extends UseCase<GetComingSoonMovie.RequestValues, GetComingSoonMovie.ResponseValues> {
+public class GetInTheatersMovie extends UseCase<GetInTheatersMovie.RequestValues, GetInTheatersMovie.ResponseValues> {
 
     private DoubanMovieRepo mDoubanMovieRepo;
 
-    public GetComingSoonMovie(DoubanMovieRepo doubanMovieRepo) {
-        mDoubanMovieRepo = doubanMovieRepo;
+    public GetInTheatersMovie(DoubanMovieRepo doubanMovieRepo) {
+        this.mDoubanMovieRepo = doubanMovieRepo;
     }
 
     @Override
     protected Observable buildUseCaseObservable(RequestValues requestValues) {
-        return mDoubanMovieRepo.movieListForComingSoon(requestValues.getStart(), requestValues.getCount());
+        return this.mDoubanMovieRepo.movieListForInTheaters(requestValues.getCity());
     }
 
     public static class RequestValues implements UseCase.RequestValues {
-        private final int start;
-        private final int count;
+        private final String mCity;
 
-        public RequestValues(int start, int count) {
-            this.start = start;
-            this.count = count;
+        public RequestValues(String city) {
+            mCity = city;
         }
 
-        public int getStart() {
-            return start;
-        }
-
-        public int getCount() {
-            return count;
+        public String getCity() {
+            return mCity;
         }
     }
 

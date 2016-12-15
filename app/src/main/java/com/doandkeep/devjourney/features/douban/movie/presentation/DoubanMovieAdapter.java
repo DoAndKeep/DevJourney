@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
 import com.doandkeep.devjourney.features.douban.movie.presentation.view.item.DoubanMovieItemView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,17 +16,26 @@ public class DoubanMovieAdapter extends RecyclerView.Adapter {
 
     private List<MovieModel> mMovies;
 
-    public DoubanMovieAdapter(List<MovieModel> movies) {
-        this.mMovies = movies;
+    public DoubanMovieAdapter() {
     }
 
     public void setData(List<MovieModel> movies) {
-        if (this.mMovies != null) {
-            this.mMovies.clear();
-            this.mMovies.addAll(movies);
+        if (mMovies != null) {
+            mMovies.clear();
         } else {
-            this.mMovies = movies;
+            mMovies = new ArrayList<>();
         }
+
+        mMovies.addAll(movies);
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<MovieModel> movies) {
+        if (mMovies == null) {
+            mMovies = new ArrayList<>();
+        }
+
+        mMovies.addAll(movies);
         notifyDataSetChanged();
     }
 

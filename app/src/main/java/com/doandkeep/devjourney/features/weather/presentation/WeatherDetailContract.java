@@ -13,8 +13,6 @@ public interface WeatherDetailContract {
 
     interface View extends LoadDataView<Presenter> {
         void showWeatherDetail(WeatherDetailModel weatherDetailModel);
-
-        boolean isActive();
     }
 
     interface Presenter extends BasePresenter {

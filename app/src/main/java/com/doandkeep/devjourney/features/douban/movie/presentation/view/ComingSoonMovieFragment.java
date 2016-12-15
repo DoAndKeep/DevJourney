@@ -9,22 +9,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.doandkeep.devjourney.R;
-import com.doandkeep.devjourney.base.presentation.BaseFragment;
-import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
+import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieListModel;
 import com.doandkeep.devjourney.features.douban.movie.presentation.DoubanMovieAdapter;
 import com.doandkeep.devjourney.features.douban.movie.presentation.contract.ComingSoonMovieContract;
+import com.doandkeep.devjourney.util.ToastUtils;
 import com.doandkeep.devjourney.view.cyclerview.DividerItemDecoration;
 import com.doandkeep.devjourney.view.cyclerview.EndlessRecyclerViewScrollListener;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 /**
+ * 即将上映电影Fragment
  * Created by zhangtao on 16/8/3.
  */
-public class ComingSoonMovieFragment extends BaseFragment implements ComingSoonMovieContract.View {
+public class ComingSoonMovieFragment extends DoubanMovieFragment implements ComingSoonMovieContract.View {
+
+    private static final int COUNT_PER_REQ = 20;
 
     @BindView(R.id.movie_srl)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -35,30 +37,12 @@ public class ComingSoonMovieFragment extends BaseFragment implements ComingSoonM
     @BindView(R.id.retry_view)
     View mRetryView;
 
-    private LinearLayoutManager mLayoutManager;
     private DoubanMovieAdapter mAdapter;
 
     protected ComingSoonMovieContract.Presenter mPresenter;
 
     public static ComingSoonMovieFragment newInstance() {
         return new ComingSoonMovieFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.resume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mPresenter.pause();
     }
 
     @Override
@@ -69,16 +53,16 @@ public class ComingSoonMovieFragment extends BaseFragment implements ComingSoonM
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
 
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-
+                loadMoreMovies(page * COUNT_PER_REQ);
             }
         });
 
-        mAdapter = new DoubanMovieAdapter(null);
+        mAdapter = new DoubanMovieAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
@@ -106,8 +90,35 @@ public class ComingSoonMovieFragment extends BaseFragment implements ComingSoonM
     }
 
     @Override
-    public void showMoives(List<MovieModel> movies) {
-        mAdapter.setData(movies);
+    public void onResume() {
+        super.onResume();
+        mPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.destroy();
+    }
+
+    @Override
+    public void showMoives(MovieListModel movieListModel) {
+        if (movieListModel != null) {
+            mAdapter.setData(movieListModel.getSubjects());
+        }
+    }
+
+    @Override
+    public void showMoreMovies(MovieListModel movieListModel) {
+        if (movieListModel != null) {
+            mAdapter.addData(movieListModel.getSubjects());
+        }
     }
 
     @Override
@@ -137,17 +148,17 @@ public class ComingSoonMovieFragment extends BaseFragment implements ComingSoonM
 
     @Override
     public void showError(String msg) {
-
+        ToastUtils.showErrorToase(context(), msg);
     }
 
     @Override
     public Context context() {
-        return this.getActivity().getApplicationContext();
+        return getContext().getApplicationContext();
     }
 
     @Override
     public void showRefresh() {
-        // donothing
+        // do nothing
     }
 
     @Override
@@ -157,14 +168,37 @@ public class ComingSoonMovieFragment extends BaseFragment implements ComingSoonM
         }
     }
 
+    @Override
+    public void showLoadingMore() {
+
+    }
+
+    @Override
+    public void hideLoadingMore() {
+
+    }
+
+    @Override
+    public String getLaber() {
+        return "即将上映";
+    }
+
     @OnClick(R.id.retry_btn)
     void onRetryBtnClicked() {
+        loadMovies();
     }
 
     private void loadMovies() {
+        mPresenter.loadMovies(COUNT_PER_REQ);
     }
 
     private void refreshMovies() {
+        mPresenter.refreshMovies(COUNT_PER_REQ);
+    }
+
+    private void loadMoreMovies(int start) {
+        Timber.i("loadMoreMovies start:" + start);
+        mPresenter.loadMoreMovies(start, COUNT_PER_REQ);
     }
 
 }

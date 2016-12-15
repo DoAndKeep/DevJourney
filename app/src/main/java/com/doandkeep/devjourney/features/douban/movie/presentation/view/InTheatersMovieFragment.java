@@ -9,22 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.doandkeep.devjourney.R;
-import com.doandkeep.devjourney.base.presentation.BaseFragment;
 import com.doandkeep.devjourney.features.douban.movie.presentation.DoubanMovieAdapter;
 import com.doandkeep.devjourney.features.douban.movie.presentation.contract.InTheatersMovieContract;
-import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieModel;
+import com.doandkeep.devjourney.features.douban.movie.presentation.model.MovieListModel;
+import com.doandkeep.devjourney.util.ToastUtils;
 import com.doandkeep.devjourney.view.cyclerview.DividerItemDecoration;
 import com.doandkeep.devjourney.view.cyclerview.EndlessRecyclerViewScrollListener;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ * 正在热映电影Fragment
  * Created by zhangtao on 16/8/3.
  */
-public class InTheatersMovieFragment extends BaseFragment implements InTheatersMovieContract.View {
+public class InTheatersMovieFragment extends DoubanMovieFragment implements InTheatersMovieContract.View {
 
     @BindView(R.id.movie_srl)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -35,30 +34,12 @@ public class InTheatersMovieFragment extends BaseFragment implements InTheatersM
     @BindView(R.id.retry_view)
     View mRetryView;
 
-    private LinearLayoutManager mLayoutManager;
     private DoubanMovieAdapter mAdapter;
 
     protected InTheatersMovieContract.Presenter mPresenter;
 
     public static InTheatersMovieFragment newInstance() {
         return new InTheatersMovieFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mPresenter.resume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mPresenter.pause();
     }
 
     @Override
@@ -69,16 +50,16 @@ public class InTheatersMovieFragment extends BaseFragment implements InTheatersM
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
 
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
 
             }
         });
 
-        mAdapter = new DoubanMovieAdapter(null);
+        mAdapter = new DoubanMovieAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST);
@@ -106,8 +87,28 @@ public class InTheatersMovieFragment extends BaseFragment implements InTheatersM
     }
 
     @Override
-    public void showMoives(List<MovieModel> movies) {
-        mAdapter.setData(movies);
+    public void onResume() {
+        super.onResume();
+        mPresenter.resume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.pause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.destroy();
+    }
+
+    @Override
+    public void showMoives(MovieListModel movieListModel) {
+        if (movieListModel != null) {
+            mAdapter.setData(movieListModel.getSubjects());
+        }
     }
 
     @Override
@@ -137,17 +138,17 @@ public class InTheatersMovieFragment extends BaseFragment implements InTheatersM
 
     @Override
     public void showError(String msg) {
-
+        ToastUtils.showErrorToase(context(), msg);
     }
 
     @Override
     public Context context() {
-        return this.getActivity().getApplicationContext();
+        return getContext().getApplicationContext();
     }
 
     @Override
     public void showRefresh() {
-        // donothing
+        // do nothing
     }
 
     @Override
@@ -157,14 +158,22 @@ public class InTheatersMovieFragment extends BaseFragment implements InTheatersM
         }
     }
 
+    @Override
+    public String getLaber() {
+        return "正在热映";
+    }
+
     @OnClick(R.id.retry_btn)
     void onRetryBtnClicked() {
+        loadMovies();
     }
 
     private void loadMovies() {
+        mPresenter.loadMovies("北京");
     }
 
     private void refreshMovies() {
+        mPresenter.refreshMovies("北京");
     }
 
 }
